@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UNDERGROUND TECHNO</title>
+  <title>TA7TELARD</title>
 
   <style>
     body {
@@ -49,13 +49,35 @@
       font-size: 12px;
       opacity: 0.5;
     }
+
+    /* PLAYER */
+    #player {
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    /* SOUND BUTTON */
+    #soundToggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0.6;
+      user-select: none;
+    }
+
+    #soundToggle:hover {
+      opacity: 1;
+    }
   </style>
 </head>
 
 <body>
 
   <h1>UNDERGROUND TECHNO</h1>
-  <p>No hype. No ads. Just sound.</p>
+  <p>Your insider access to the Underground scene 🔊</p>
 
   <a
     class="join"
@@ -75,6 +97,55 @@
   <div class="footer">
     Cairo Underground • Techno Only
   </div>
+
+  <!-- SOUND ICON -->
+  <div id="soundToggle">🔊</div>
+
+  <!-- YOUTUBE API -->
+  <div id="player"></div>
+
+  <script>
+    let player;
+    let muted = false;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        playerVars: {
+          listType: 'playlist',
+          list: 'PLsuo2h0lgIFU5QXTy3mMVpjSkKtPT9z4g',
+          autoplay: 1,
+          loop: 1,
+          controls: 0,
+          mute: 0
+        },
+        events: {
+          onReady: (e) => {
+            e.target.playVideo();
+          }
+        }
+      });
+    }
+
+    document.getElementById("soundToggle").onclick = () => {
+      if (!player) return;
+
+      muted = !muted;
+      if (muted) {
+        player.mute();
+        soundToggle.textContent = "🔇";
+      } else {
+        player.unMute();
+        soundToggle.textContent = "🔊";
+      }
+    };
+
+    // Load API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+  </script>
 
 </body>
 </html>
