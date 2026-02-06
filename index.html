@@ -3,48 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <title>UNDERGROUND TECHNO</title>
+
   <style>
     body {
       background: black;
       color: white;
       font-family: monospace;
       text-align: center;
-      padding: 50px;
+      padding: 60px 20px;
+      letter-spacing: 1px;
     }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
     .join {
-  display: inline-block;
-  margin: 20px 0;
-  padding: 15px 30px;
-  border: 1px solid white;
-  color: white;
-  text-decoration: none;
-  letter-spacing: 2px;
-}
+      display: inline-block;
+      margin: 20px 0;
+      padding: 15px 35px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      letter-spacing: 3px;
+      transition: 0.2s;
+    }
 
-.join:hover {
-  background: white;
-  color: black;
-}
+    .join:hover {
+      background: white;
+      color: black;
+    }
 
+    .qr {
+      margin-top: 40px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 12px;
+      opacity: 0.5;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>UNDERGROUND TECHNO</h1>
+  <p>No hype. No ads. Just sound.</p>
 
-<p>Join the circle.</p>
+  <a
+    class="join"
+    href="https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
+    target="_blank"
+  >
+    JOIN WHATSAPP GROUP
+  </a>
 
-<a class="join" href="https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj" target="_blank">
-JOIN WHATSAPP GROUP
-</a>
+  <div class="qr">
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
+      alt="WhatsApp Group QR Code"
+    />
+  </div>
 
-<br><br>
-
-<img 
-  src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
-  alt="WhatsApp QR"
-/>
-
+  <div class="footer">
+    Cairo Underground • Techno Only
+  </div>
 
 </body>
 </html>
