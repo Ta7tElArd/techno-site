@@ -2,45 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TA7TELARD - Events</title>
+  <title>TA7TELARD EVENTS</title>
   <style>
     body {
       background: black;
       color: white;
       font-family: monospace;
-      padding: 40px;
+      text-align: center;
+      padding: 40px 20px;
       letter-spacing: 1px;
     }
 
     h1 {
       font-size: 32px;
-      margin-bottom: 30px;
-    }
-
-    .event {
-      border: 1px solid #333;
-      padding: 20px;
       margin-bottom: 20px;
     }
 
-    .event h2 {
-      margin: 0 0 10px 0;
-      font-size: 24px;
+    a.button {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 12px 30px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: 0.2s;
     }
 
-    .event p {
-      margin: 5px 0;
-      opacity: 0.8;
+    a.button:hover {
+      background: white;
+      color: black;
+    }
+
+    .events-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .event {
+      background: #111;
+      padding: 15px;
+      width: 300px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .event:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px #fff;
+    }
+
+    .event-img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+      border: 1px solid #555;
+      border-radius: 4px;
     }
 
     .reserve {
       display: inline-block;
       margin-top: 10px;
-      padding: 10px 20px;
-      border: 1px solid white;
+      padding: 10px 25px;
+      border: 1px solid #fff;
       color: white;
       text-decoration: none;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       transition: 0.2s;
     }
 
@@ -50,14 +82,17 @@
     }
   </style>
 </head>
+
 <body>
 
-  <h1>Upcoming Events</h1>
+  <h1>TA7TELARD EVENTS</h1>
 
-  <div id="events-container">
+  <a href="index.html" class="button">← Back to Home</a>
 
-    <!-- Example event placeholder -->
+  <div class="events-container" id="events-container">
+    <!-- Example Event -->
     <div class="event">
+      <img src="https://via.placeholder.com/400x200?text=Event+Image" alt="Event Image" class="event-img" />
       <h2>Techno Night at Warehouse</h2>
       <p>Date: 25/02/2026</p>
       <p>Location: Cairo</p>
@@ -65,21 +100,24 @@
     </div>
 
     <div class="event">
-      <h2>Underground Session</h2>
-      <p>Date: 01/03/2026</p>
+      <img src="https://via.placeholder.com/400x200?text=Event+Image" alt="Event Image" class="event-img" />
+      <h2>After Dark Rave</h2>
+      <p>Date: 28/02/2026</p>
       <p>Location: Secret Venue</p>
       <a href="#" class="reserve">Reserve Spot</a>
     </div>
 
+    <!-- Add more events manually or via JS -->
   </div>
 
   <script>
-    // Easy manual add event
-    function addEvent(title, date, location, link="#") {
+    // Optional: add events dynamically
+    function addEvent(title, date, location, link="#", img="https://via.placeholder.com/400x200?text=Event+Image") {
       const container = document.getElementById("events-container");
       const div = document.createElement("div");
       div.className = "event";
       div.innerHTML = `
+        <img src="${img}" alt="Event Image" class="event-img" />
         <h2>${title}</h2>
         <p>Date: ${date}</p>
         <p>Location: ${location}</p>
@@ -88,8 +126,8 @@
       container.appendChild(div);
     }
 
-    // Example: uncomment to add new event dynamically
-    // addEvent("New Underground Party", "10/03/2026", "Secret Location");
+    // Example of dynamic add
+    // addEvent("New Underground Party", "05/03/2026", "Secret Warehouse", "#", "https://via.placeholder.com/400x200?text=New+Event");
   </script>
 
 </body>
