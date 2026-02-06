@@ -80,6 +80,11 @@
       background: white;
       color: black;
     }
+
+    p {
+      margin: 5px 0;
+      opacity: 0.9;
+    }
   </style>
 </head>
 
@@ -89,46 +94,27 @@
 
   <a href="index.html" class="button">← Back to Home</a>
 
-  <div class="events-container" id="events-container">
-    <!-- Example Event -->
+  <div class="events-container">
+
+    <!-- SATURDAY PARTY 7 FEB -->
     <div class="event">
-      <img src="https://via.placeholder.com/400x200?text=Event+Image" alt="Event Image" class="event-img" />
-      <h2>Techno Night at Warehouse</h2>
-      <p>Date: 25/02/2026</p>
-      <p>Location: Cairo</p>
-      <a href="#" class="reserve">Reserve Spot</a>
+      <img src="https://cairoevent.com/cdn/shop/files/IMG_2448_720x.jpg?v=1770052502" alt="Saturday Party 7 Feb" class="event-img" />
+      <h2>SATURDAY PARTY 7 FEB</h2>
+      <p>VENUE: RAWI LOUNGE</p>
+      <p>TIME: From 10 PM till 5 AM</p>
+      <a href="https://cairoevent.com/collections/rawi-lounge/products/saturday-7-feb" class="reserve" target="_blank">Reserve Spot</a>
     </div>
 
+    <!-- MONDAY PARTY 9 FEB -->
     <div class="event">
-      <img src="https://via.placeholder.com/400x200?text=Event+Image" alt="Event Image" class="event-img" />
-      <h2>After Dark Rave</h2>
-      <p>Date: 28/02/2026</p>
-      <p>Location: Secret Venue</p>
-      <a href="#" class="reserve">Reserve Spot</a>
+      <img src="https://cairoevent.com/cdn/shop/files/107bcffb-ffdf-48df-bb2a-e859b3ff40a2_720x.jpg?v=1770317181" alt="Monday Party 9 Feb" class="event-img" />
+      <h2>MONDAY PARTY 9 FEB</h2>
+      <p>VENUE: T-BAR</p>
+      <p>TIME: From 10 PM till 5 AM</p>
+      <a href="https://cairoevent.com/collections/frontpage/products/monday-9-feb" class="reserve" target="_blank">Reserve Spot</a>
     </div>
 
-    <!-- Add more events manually or via JS -->
   </div>
-
-  <script>
-    // Optional: add events dynamically
-    function addEvent(title, date, location, link="#", img="https://via.placeholder.com/400x200?text=Event+Image") {
-      const container = document.getElementById("events-container");
-      const div = document.createElement("div");
-      div.className = "event";
-      div.innerHTML = `
-        <img src="${img}" alt="Event Image" class="event-img" />
-        <h2>${title}</h2>
-        <p>Date: ${date}</p>
-        <p>Location: ${location}</p>
-        <a href="${link}" class="reserve">Reserve Spot</a>
-      `;
-      container.appendChild(div);
-    }
-
-    // Example of dynamic add
-    // addEvent("New Underground Party", "05/03/2026", "Secret Warehouse", "#", "https://via.placeholder.com/400x200?text=New+Event");
-  </script>
 
 </body>
 </html>
