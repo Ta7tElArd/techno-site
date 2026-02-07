@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>UPCOMING TECHNO EVENTS</title>
+
   <style>
     body {
-      background: black;
+      margin: 0;
+      padding: 40px 20px;
       color: white;
       font-family: monospace;
       text-align: center;
-      padding: 40px 20px;
       letter-spacing: 1px;
+
       background: url("events-bg.gif") no-repeat center center fixed;
       background-size: cover;
     }
 
-     /* dark overlay */
+    /* dark overlay (ACTUALLY USED NOW) */
     .overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: rgba(0,0,0,0.65);
       z-index: -1;
     }
@@ -33,13 +32,15 @@
 
     a.button {
       display: inline-block;
-      margin: 10px 5px;
+      margin: 10px 5px 25px;
       padding: 12px 30px;
       border: 1px solid white;
       color: white;
       text-decoration: none;
       letter-spacing: 2px;
       transition: 0.2s;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(2px);
     }
 
     a.button:hover {
@@ -52,16 +53,15 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      margin-top: 30px;
     }
 
     .event {
-      background: #111;
-      padding: 15px;
       width: 300px;
-      border: 1px solid #444;
+      padding: 15px;
       border-radius: 8px;
-      text-align: center;
+      border: 1px solid #555;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -72,20 +72,18 @@
 
     .event-img {
       width: 100%;
-      height: auto;
-      margin-bottom: 15px;
-      border: 1px solid #555;
       border-radius: 4px;
+      margin-bottom: 12px;
+      border: 1px solid #666;
     }
 
     .reserve {
       display: inline-block;
       margin-top: 10px;
       padding: 10px 25px;
-      border: 1px solid #fff;
+      border: 1px solid white;
       color: white;
       text-decoration: none;
-      letter-spacing: 1px;
       transition: 0.2s;
     }
 
@@ -95,7 +93,7 @@
     }
 
     p {
-      margin: 5px 0;
+      margin: 6px 0;
       opacity: 0.9;
     }
   </style>
@@ -103,69 +101,67 @@
 
 <body>
 
+  <!-- REQUIRED FOR GIF READABILITY -->
+  <div class="overlay"></div>
+
   <h1>UPCOMING TECHNO EVENTS</h1>
 
   <a href="index.html" class="button">← Back to Home</a>
 
   <div class="events-container">
 
-    <!-- SATURDAY PARTY 7 FEB -->
     <div class="event">
-      <img src="https://cairoevent.com/cdn/shop/files/IMG_2448_720x.jpg?v=1770052502" alt="Saturday Party 7 Feb" class="event-img" />
+      <img src="https://cairoevent.com/cdn/shop/files/IMG_2448_720x.jpg?v=1770052502" class="event-img">
       <h2>SATURDAY PARTY 7 FEB</h2>
       <p>VENUE: RAWI LOUNGE</p>
       <p>TIME: From 10 PM till 5 AM</p>
-      <a href="https://cairoevent.com/collections/rawi-lounge/products/saturday-7-feb" class="reserve" target="_blank">Reserve Spot</a>
+      <a href="https://cairoevent.com/collections/rawi-lounge/products/saturday-7-feb" target="_blank" class="reserve">Reserve Spot</a>
     </div>
 
-    <!-- MONDAY PARTY 9 FEB -->
     <div class="event">
-      <img src="https://cairoevent.com/cdn/shop/files/107bcffb-ffdf-48df-bb2a-e859b3ff40a2_720x.jpg?v=1770317181" alt="Monday Party 9 Feb" class="event-img" />
+      <img src="https://cairoevent.com/cdn/shop/files/107bcffb-ffdf-48df-bb2a-e859b3ff40a2_720x.jpg?v=1770317181" class="event-img">
       <h2>MONDAY PARTY 9 FEB</h2>
       <p>VENUE: T-BAR</p>
       <p>TIME: From 10 PM till 5 AM</p>
-      <a href="https://cairoevent.com/collections/frontpage/products/monday-9-feb" class="reserve" target="_blank">Reserve Spot</a>
+      <a href="https://cairoevent.com/collections/frontpage/products/monday-9-feb" target="_blank" class="reserve">Reserve Spot</a>
     </div>
 
-    <!-- Tuesday PARTY 10 FEB -->
     <div class="event">
-      <img src="https://cairoevent.com/cdn/shop/files/b2387764-a06a-4f8e-aaea-6e9d59861351_720x.jpg?v=1770410030" alt="TUESDAY PARTY 10 FEB" class="event-img" />
+      <img src="https://cairoevent.com/cdn/shop/files/b2387764-a06a-4f8e-aaea-6e9d59861351_720x.jpg?v=1770410030" class="event-img">
       <h2>TUESDAY PARTY 10 FEB</h2>
       <p>VENUE: RAWI LOUNGE</p>
       <p>TIME: From 10 PM till 5 AM</p>
-      <a href="https://cairoevent.com/collections/rawi-lounge/products/tuesday-10-feb" class="reserve" target="_blank">Reserve Spot</a>
+      <a href="https://cairoevent.com/collections/rawi-lounge/products/tuesday-10-feb" target="_blank" class="reserve">Reserve Spot</a>
     </div>
 
     <div class="event">
-      <img src="https://cairospots.com/wp-content/uploads/2026/01/Event-Cover-9-1-1024x576.jpg" alt="The Moment" class="event-img" />
+      <img src="https://cairospots.com/wp-content/uploads/2026/01/Event-Cover-9-1-1024x576.jpg" class="event-img">
       <h2>21 March 2026</h2>
       <p>VENUE: Il Monte Galala</p>
       <p>TIME: From 08:00 + 8H</p>
-      <a href="https://ticketegypt.venflare.com/events/1144680f-af24-4ea7-8aea-73f92c4ff2a6/tickets" class="reserve" target="_blank">Reserve Spot</a>
+      <a href="https://ticketegypt.venflare.com/events/1144680f-af24-4ea7-8aea-73f92c4ff2a6/tickets" target="_blank" class="reserve">Reserve Spot</a>
     </div>
 
     <div class="event">
-      <img src="https://ticketingsystemadmina29b1f146cd8476b9f9aefcf325165037-prod.s3.us-east-2.amazonaws.com/public/1769951175866-laptop-artwork.webp" alt="The Moment" class="event-img" />
+      <img src="https://ticketingsystemadmina29b1f146cd8476b9f9aefcf325165037-prod.s3.us-east-2.amazonaws.com/public/1769951175866-laptop-artwork.webp" class="event-img">
       <h2>21 March 2026</h2>
       <p>VENUE: Ain El Sokhna - Palm Beach</p>
-      <a href="https://www.ulterbooking.com/home/events/6dbc4edc-ae63-46ab-a2ca-83d21c8bb168/#tickets" class="reserve" target="_blank">Reserve Spot</a>
+      <a href="https://www.ulterbooking.com/home/events/6dbc4edc-ae63-46ab-a2ca-83d21c8bb168/#tickets" target="_blank" class="reserve">Reserve Spot</a>
     </div>
 
     <div class="event">
-      <img src="https://cairospots.com/wp-content/uploads/2026/01/banner-md-v02.png" alt="No Art" class="event-img" />
+      <img src="https://cairospots.com/wp-content/uploads/2026/01/banner-md-v02.png" class="event-img">
       <h2>22 March 2026</h2>
-      <p>VENUE: Human Figures Platform, Somabay </p>
-      <a href="https://ticketegypt.venflare.com/events/03e05beb-9280-4cee-928e-c12bc8257d23/tickets" class="reserve" target="_blank">Reserve Spot</a>
+      <p>VENUE: Human Figures Platform, Somabay</p>
+      <a href="https://ticketegypt.venflare.com/events/03e05beb-9280-4cee-928e-c12bc8257d23/tickets" target="_blank" class="reserve">Reserve Spot</a>
     </div>
 
     <div class="event">
-      <img src="https://mvz0arrkspkc4c0szcejuhxpl3fpz1.files-sashido.cloud/1ada381d83e61ddfa68fe64ab77a6d3c_Z%20PYRAMIDS%202026%20%20square.jpg" alt="Zamna" class="event-img" />
-      <h2>April 24 - April 26</h2>
-      <p>VENUE: The Great Pyramids Of Giza Pyramids of Giza</p>
-      <a href="https://www.technoandchill.com/events/n9uCHrnl0V" class="reserve" target="_blank">Reserve Spot</a>
+      <img src="https://mvz0arrkspkc4c0szcejuhxpl3fpz1.files-sashido.cloud/1ada381d83e61ddfa68fe64ab77a6d3c_Z%20PYRAMIDS%202026%20%20square.jpg" class="event-img">
+      <h2>April 24 – April 26</h2>
+      <p>VENUE: The Great Pyramids of Giza</p>
+      <a href="https://www.technoandchill.com/events/n9uCHrnl0V" target="_blank" class="reserve">Reserve Spot</a>
     </div>
-
-    
 
   </div>
 
