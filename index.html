@@ -28,6 +28,16 @@
       z-index: -1;
     }
 
+    /* logo in top-left */
+    .logo {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 100px; /* حجم اللوجو ممكن تعدله حسب الحاجة */
+      height: auto;
+      z-index: 10;
+    }
+
     h1 {
       font-size: 32px;
       margin-bottom: 10px;
@@ -72,6 +82,9 @@
 
   <!-- overlay layer -->
   <div class="overlay"></div>
+
+  <!-- logo -->
+  <img src="logo.png" alt="TA7TELARD Logo" class="logo" />
 
   <h1>TA7TELARD</h1>
   <p>Your insider access to the Underground scene 🔊</p>
