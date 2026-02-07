@@ -8,21 +8,11 @@
     body {
       margin: 0;
       padding: 40px 20px;
+      background: black;
       color: white;
       font-family: monospace;
       text-align: center;
       letter-spacing: 1px;
-
-      background: url("events-bg.gif") no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* dark overlay (ACTUALLY USED NOW) */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      z-index: -1;
     }
 
     h1 {
@@ -39,8 +29,6 @@
       text-decoration: none;
       letter-spacing: 2px;
       transition: 0.2s;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(2px);
     }
 
     a.button:hover {
@@ -59,9 +47,8 @@
       width: 300px;
       padding: 15px;
       border-radius: 8px;
-      border: 1px solid #555;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
+      border: 1px solid #444;
+      background: #111;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
@@ -100,9 +87,6 @@
 </head>
 
 <body>
-
-  <!-- REQUIRED FOR GIF READABILITY -->
-  <div class="overlay"></div>
 
   <h1>UPCOMING TECHNO EVENTS</h1>
 
