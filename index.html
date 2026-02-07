@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <title>TA7TELARD</title>
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGH1LLK5SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SGH1LLK5SH');
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -12,12 +21,10 @@
       color: white;
       text-align: center;
       letter-spacing: 1px;
-
       background: url("bg.gif") no-repeat center center fixed;
       background-size: cover;
     }
 
-    /* dark overlay so text is readable */
     .overlay {
       position: fixed;
       top: 0;
@@ -28,12 +35,11 @@
       z-index: -1;
     }
 
-    /* logo in top-left */
     .logo {
       position: fixed;
       top: 20px;
       left: 20px;
-      width: 300px; /* حجم اللوجو ممكن تعدله حسب الحاجة */
+      width: 300px;
       height: auto;
       z-index: 10;
     }
@@ -80,10 +86,8 @@
 
 <body>
 
-  <!-- overlay layer -->
   <div class="overlay"></div>
 
-  <!-- logo -->
   <img src="logo.png" alt="TA7TELARD Logo" class="logo" />
 
   <h1>TA7TELARD</h1>
@@ -93,6 +97,7 @@
     class="join"
     href="https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
     target="_blank"
+    onclick="gtag('event','click',{event_category:'button',event_label:'whatsapp'});"
   >
     JOIN WHATSAPP GROUP
   </a>
@@ -100,6 +105,7 @@
   <a
     class="join"
     href="events.html"
+    onclick="gtag('event','click',{event_category:'button',event_label:'events'});"
   >
     EVENTS
   </a>
