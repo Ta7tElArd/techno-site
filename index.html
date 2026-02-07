@@ -6,12 +6,26 @@
 
   <style>
     body {
-      background: black;
-      color: white;
-      font-family: monospace;
-      text-align: center;
+      margin: 0;
       padding: 60px 20px;
+      font-family: monospace;
+      color: white;
+      text-align: center;
       letter-spacing: 1px;
+
+      background: url("bg.gif") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    /* dark overlay so text is readable */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
     }
 
     h1 {
@@ -26,13 +40,15 @@
 
     .join {
       display: inline-block;
-      margin: 20px 0;
+      margin: 20px 10px;
       padding: 15px 35px;
       border: 1px solid white;
       color: white;
       text-decoration: none;
       letter-spacing: 3px;
       transition: 0.2s;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(2px);
     }
 
     .join:hover {
@@ -43,10 +59,19 @@
     .qr {
       margin-top: 40px;
     }
+
+    .qr img {
+      background: white;
+      padding: 10px;
+      border-radius: 6px;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- overlay layer -->
+  <div class="overlay"></div>
 
   <h1>TA7TELARD</h1>
   <p>Your insider access to the Underground scene 🔊</p>
@@ -58,13 +83,13 @@
   >
     JOIN WHATSAPP GROUP
   </a>
-  <a
-  class="join"
-  href="events.html"
->
-  EVENTS
-</a>
 
+  <a
+    class="join"
+    href="events.html"
+  >
+    EVENTS
+  </a>
 
   <div class="qr">
     <img
