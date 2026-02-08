@@ -68,6 +68,24 @@
     iframe, blockquote {
       max-width: 100%;
     }
+
+    /* crypto ad container */
+    .ad-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      position: relative;
+      z-index: 20; /* ensure it's above anything */
+    }
+
+    .ad-container iframe {
+      width: 70%;
+      height: auto;
+      border: 0;
+      display: block;
+      margin: auto;
+      overflow: hidden;
+    }
   </style>
 </head>
 
@@ -77,6 +95,11 @@
   <p>Underground moments & selected posts</p>
 
   <a href="index.html" class="button">← Back to Home</a>
+
+  <!-- Crypto Ad Banner -->
+  <div class="ad-container">
+    <iframe data-aa='2426882' src='//acceptable.a-ads.com/2426882/?size=Adaptive'></iframe>
+  </div>
 
   <div class="posts">
 
