@@ -35,6 +35,7 @@
       z-index: -1;
     }
 
+    /* logo in top-left */
     .logo {
       position: fixed;
       top: 20px;
@@ -72,13 +73,6 @@
       color: black;
     }
 
-    /* Ad container */
-    .ad-container {
-      margin: 40px auto;
-      max-width: 800px;
-      opacity: 0.85;
-    }
-
     .qr {
       margin-top: 40px;
     }
@@ -88,6 +82,21 @@
       padding: 10px;
       border-radius: 6px;
     }
+
+    /* ad container fixes */
+    .ad-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 40px auto; /* space from buttons */
+      position: relative; /* relative so overlay doesn't cover */
+      z-index: 5; /* above overlay but below logo */
+      background: transparent;
+    }
+
+    .ad-container iframe {
+      min-height: 90px; /* prevent collapse */
+      width: 100%;
+    }
   </style>
 </head>
 
@@ -95,7 +104,6 @@
 
   <div class="overlay"></div>
 
-  <!-- Logo -->
   <img src="logo.png" alt="TA7TELARD Logo" class="logo" />
 
   <h1>TA7TELARD</h1>
@@ -117,21 +125,15 @@
   >
     EVENTS
   </a>
-
   <a class="join" href="blogs.html">BLOGS</a>
 
-  <!-- Ad Banner -->
+  <!-- Ad banner -->
   <div class="ad-container">
-    <div id="frame" style="width: 100%; margin: auto; position: relative;">
-      <iframe
-        data-aa="2426881"
-        src="//acceptable.a-ads.com/2426881/?size=Adaptive"
-        style="border:0; padding:0; width:70%; height:auto; overflow:hidden; display:block; margin:auto">
-      </iframe>
-    </div>
+    <iframe data-aa='2426881' 
+            src='//acceptable.a-ads.com/2426881/?size=Adaptive'
+            style='border:0; padding:0; overflow:hidden; display:block; margin:auto;'></iframe>
   </div>
 
-  <!-- QR -->
   <div class="qr">
     <img
       src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
