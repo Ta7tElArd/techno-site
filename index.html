@@ -35,6 +35,7 @@
       z-index: -1;
     }
 
+    /* logo in top-left */
     .logo {
       position: fixed;
       top: 20px;
@@ -72,37 +73,6 @@
       color: black;
     }
 
-    .slider-container {
-      max-width: 400px;
-      margin: 60px auto 20px auto;
-    }
-
-    .slider-container h2 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      letter-spacing: 2px;
-    }
-
-    .slider {
-      position: relative;
-      height: 500px;
-      overflow: hidden;
-    }
-
-    .slider img {
-      position: absolute;
-      width: 100%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-      border: 1px solid #555;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .slider img.active {
-      opacity: 1;
-    }
-
     .qr {
       margin-top: 40px;
     }
@@ -113,11 +83,19 @@
       border-radius: 6px;
     }
 
+    /* ad container fixes */
     .ad-container {
       width: 100%;
-      margin: 40px auto;
-      position: relative;
-      z-index: 1;
+      max-width: 800px;
+      margin: 40px auto; /* space from buttons */
+      position: relative; /* relative so overlay doesn't cover */
+      z-index: 5; /* above overlay but below logo */
+      background: transparent;
+    }
+
+    .ad-container iframe {
+      min-height: 90px; /* prevent collapse */
+      width: 100%;
     }
   </style>
 </head>
@@ -147,22 +125,9 @@
   >
     EVENTS
   </a>
-
   <a class="join" href="blogs.html">BLOGS</a>
 
-  <!-- 🔥 Events Auto Slider -->
-  <div class="slider-container">
-    <h2>UPCOMING EVENTS</h2>
-    <div class="slider" id="slider"></div>
-  </div>
-
-  <!-- 💰 Ad Banner -->
-  <div class="ad-container">
-    <iframe data-aa='2426881'
-      src='//acceptable.a-ads.com/2426881/?size=Adaptive'
-      style='border:0; width:70%; height:120px; display:block; margin:auto;'>
-    </iframe>
-  </div>
+  
 
   <div class="qr">
     <img
@@ -170,38 +135,6 @@
       alt="WhatsApp Group QR Code"
     />
   </div>
-
-  <script>
-    const events = [
-      {
-        img: "https://cairoevent.com/cdn/shop/files/IMG_2448_720x.jpg?v=1770052502",
-        link: "https://cairoevent.com/collections/rawi-lounge/products/saturday-7-feb"
-      },
-      {
-        img: "https://cairoevent.com/cdn/shop/files/107bcffb-ffdf-48df-bb2a-e859b3ff40a2_720x.jpg?v=1770317181",
-        link: "https://cairoevent.com/collections/frontpage/products/monday-9-feb"
-      }
-    ];
-
-    const slider = document.getElementById("slider");
-
-    events.forEach((event, index) => {
-      const img = document.createElement("img");
-      img.src = event.img;
-      if (index === 0) img.classList.add("active");
-      img.onclick = () => window.open(event.link, "_blank");
-      slider.appendChild(img);
-    });
-
-    let current = 0;
-    const slides = slider.querySelectorAll("img");
-
-    setInterval(() => {
-      slides[current].classList.remove("active");
-      current = (current + 1) % slides.length;
-      slides[current].classList.add("active");
-    }, 3000);
-  </script>
 
 </body>
 </html>
