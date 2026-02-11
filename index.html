@@ -16,125 +16,157 @@
   <style>
     body {
       margin: 0;
-      padding: 60px 20px;
-      font-family: monospace;
+      padding: 40px 20px;
+      background: black;
       color: white;
+      font-family: monospace;
       text-align: center;
       letter-spacing: 1px;
-      background: url("bg.gif") no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-    }
-
-    /* logo in top-left */
-    .logo {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 300px;
-      height: auto;
-      z-index: 10;
     }
 
     h1 {
-      font-size: 32px;
+      font-size: 40px;
       margin-bottom: 10px;
     }
 
     p {
-      opacity: 0.8;
+      opacity: 0.7;
       margin-bottom: 30px;
     }
 
-    .join {
+    .button {
       display: inline-block;
-      margin: 20px 10px;
-      padding: 15px 35px;
+      padding: 12px 30px;
       border: 1px solid white;
       color: white;
       text-decoration: none;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       transition: 0.2s;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(2px);
+      margin-top: 20px;
     }
 
-    .join:hover {
+    .button:hover {
       background: white;
       color: black;
     }
 
-    .qr {
+    .side-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
       margin-top: 40px;
+      flex-wrap: wrap;
     }
 
     .qr img {
-      background: white;
-      padding: 10px;
+      width: 220px;
+      border: 1px solid #444;
+    }
+
+    .events-preview {
+      width: 260px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #444;
+      padding: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .events-preview h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 360px;
+      overflow: hidden;
+    }
+
+    .slider img {
+      position: absolute;
+      width: 100%;
+      height: auto;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
       border-radius: 6px;
+      border: 1px solid #555;
+      cursor: pointer;
     }
 
-    /* ad container fixes */
-    .ad-container {
-      width: 100%;
-      max-width: 800px;
-      margin: 40px auto; /* space from buttons */
-      position: relative; /* relative so overlay doesn't cover */
-      z-index: 5; /* above overlay but below logo */
-      background: transparent;
+    .slider img.active {
+      opacity: 1;
     }
 
-    .ad-container iframe {
-      min-height: 90px; /* prevent collapse */
-      width: 100%;
-    }
   </style>
 </head>
 
 <body>
 
-  <div class="overlay"></div>
-
-  <img src="logo.png" alt="TA7TELARD Logo" class="logo" />
-
   <h1>TA7TELARD</h1>
-  <p>Your insider access to the Underground scene 🔊</p>
+  <p>Underground Techno Movement</p>
 
-  <a
-    class="join"
-    href="https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
-    target="_blank"
-    onclick="gtag('event','click',{event_category:'button',event_label:'whatsapp'});"
-  >
-    JOIN WHATSAPP GROUP
-  </a>
+  <a href="events.html" class="button">VIEW ALL EVENTS</a>
 
-  <a
-    class="join"
-    href="events.html"
-    onclick="gtag('event','click',{event_category:'button',event_label:'events'});"
-  >
-    EVENTS
-  </a>
-  <a class="join" href="blogs.html">BLOGS</a>
+  <div class="side-section">
 
-  
+    <div class="qr">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
+        alt="WhatsApp Group QR Code"
+      />
+    </div>
 
-  <div class="qr">
-    <img
-      src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
-      alt="WhatsApp Group QR Code"
-    />
+    <div class="events-preview">
+      <h3>AVAILABLE EVENTS</h3>
+      <div class="slider" id="slider"></div>
+    </div>
+
   </div>
+
+  <script>
+    fetch('events.html')
+      .then(response => response.text())
+      .then(data => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, 'text/html');
+        const events = doc.querySelectorAll('.event');
+        const slider = document.getElementById('slider');
+
+        if (events.length > 0) {
+          events.forEach((event, index) => {
+            const imgSrc = event.querySelector('img').src;
+            const reserveLink = event.querySelector('a[href^="http"]').href;
+
+            const img = document.createElement('img');
+            img.src = imgSrc;
+
+            if(index === 0) img.classList.add('active');
+
+            img.onclick = function() {
+              window.open(reserveLink, '_blank');
+            };
+
+            slider.appendChild(img);
+          });
+
+          let current = 0;
+          const slides = slider.querySelectorAll('img');
+
+          setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+          }, 3000);
+        }
+      });
+  </script>
 
 </body>
 </html>
