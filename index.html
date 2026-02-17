@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,6 @@
       letter-spacing: 1px;
       background: url("bg.gif") no-repeat center center fixed;
       background-size: cover;
-      perspective: 1200px; /* perspective for 3D */
     }
 
     .overlay {
@@ -34,7 +34,6 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.6);
       z-index: -1;
-      transform: translateZ(-50px) scale(1.05); /* slight 3D depth */
     }
 
     /* logo in top-left */
@@ -45,24 +44,16 @@
       width: 300px;
       height: auto;
       z-index: 10;
-      transform: rotateY(-10deg) translateZ(20px);
-      transition: transform 0.5s;
-    }
-
-    .logo:hover {
-      transform: rotateY(0deg) translateZ(40px) scale(1.05);
     }
 
     h1 {
       font-size: 32px;
       margin-bottom: 10px;
-      transform: translateZ(50px);
     }
 
     p {
       opacity: 0.8;
       margin-bottom: 30px;
-      transform: translateZ(30px);
     }
 
     .join {
@@ -73,53 +64,39 @@
       color: white;
       text-decoration: none;
       letter-spacing: 3px;
-      transition: 0.3s;
+      transition: 0.2s;
       background: rgba(0,0,0,0.4);
       backdrop-filter: blur(2px);
-      transform: rotateX(0deg) rotateY(0deg) translateZ(20px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
     .join:hover {
       background: white;
       color: black;
-      transform: rotateX(5deg) rotateY(5deg) translateZ(50px) scale(1.1);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
 
     .qr {
       margin-top: 40px;
-      transform: translateZ(40px) rotateY(-5deg);
-      transition: transform 0.5s;
-      display: inline-block;
     }
 
     .qr img {
       background: white;
       padding: 10px;
       border-radius: 6px;
-      transform: rotateX(2deg) translateZ(20px);
-    }
-
-    .qr:hover {
-      transform: translateZ(60px) rotateY(0deg) scale(1.05);
     }
 
     /* ad container fixes */
     .ad-container {
       width: 100%;
       max-width: 800px;
-      margin: 40px auto;
-      position: relative;
-      z-index: 5;
+      margin: 40px auto; /* space from buttons */
+      position: relative; /* relative so overlay doesn't cover */
+      z-index: 5; /* above overlay but below logo */
       background: transparent;
-      transform: translateZ(25px);
     }
 
     .ad-container iframe {
-      min-height: 90px;
+      min-height: 90px; /* prevent collapse */
       width: 100%;
-      border: none;
     }
   </style>
 </head>
@@ -140,7 +117,7 @@
     target="_blank"
     onclick="gtag('event','click',{event_category:'button',event_label:'whatsapp'});"
   >
-    JOIN WHATSAPP GROUP
+    JOIN COMMUNITY
   </a>
 
   <a
@@ -152,12 +129,17 @@
   </a>
   <a class="join" href="blogs.html">BLOGS</a>
 
+  
+
   <div class="qr">
     <img
       src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://chat.whatsapp.com/LeQP0EFPY1BCM4wEySQlfj"
       alt="WhatsApp Group QR Code"
     />
   </div>
+
+
+
 
 </body>
 </html>
