@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UPCOMING TECHNO EVENTS</title>
+  <title>UPCOMING TECHNO EVENTS - 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGH1LLK5SH"></script>
@@ -16,216 +17,361 @@
   <style>
     body {
       margin: 0;
-      padding: 40px 20px;
-      background: black;
+      padding: 0;
+      background: #050505; /* Deep black background */
       color: white;
-      font-family: monospace;
+      font-family: 'Courier New', Courier, monospace;
       text-align: center;
-      letter-spacing: 1px;
+      overflow: hidden; /* Prevents scrollbars */
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; /* Forces vertical centering */
+    }
+
+    /* Header pushed to top */
+    .header-container {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      z-index: 20;
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
+      font-size: 28px;
+      margin: 0 0 15px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.4);
     }
 
     a.button {
       display: inline-block;
-      margin: 10px 5px 25px;
-      padding: 12px 30px;
-      border: 1px solid white;
-      color: white;
+      padding: 8px 20px;
+      border: 1px solid #444;
+      color: #bbb;
       text-decoration: none;
+      font-size: 12px;
       letter-spacing: 2px;
-      transition: 0.2s;
+      transition: 0.3s;
+      background: rgba(0,0,0,0.8);
     }
 
     a.button:hover {
-      background: white;
-      color: black;
+      border-color: white;
+      color: white;
+      background: #111;
     }
 
-    .events-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 120px; /* leave space for sticky ad */
+    /* --- 3D SCENE --- */
+    .scene {
+      position: relative;
+      /* Restored to Larger Dimensions */
+      width: 340px;
+      height: 560px;
+      perspective: 1200px;
+      margin-top: 40px; /* Slight offset from header */
+      transition: transform 0.3s ease;
+    }
+
+    .carousel {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); /* Smooth 'Apple-like' ease */
     }
 
     .event {
-      width: 300px;
+      position: absolute;
+      width: 340px;
+      height: 560px;
+      left: 0;
+      top: 0;
+      background: #080808;
+      border: 1px solid #333;
+      box-sizing: border-box;
       padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background: #111;
-      transition: transform 0.2s, box-shadow 0.2s;
+      text-align: center;
+      backface-visibility: hidden;
+      
+      /* Hidden State */
+      opacity: 0.05; 
+      transform: scale(0.9);
+      transition: opacity 0.6s, transform 0.6s, box-shadow 0.6s;
+      pointer-events: none;
     }
 
-    .event:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 15px #fff;
+    /* Active State (The one facing you) */
+    .event.active {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.15);
+      border-color: #777;
+      pointer-events: auto;
+      z-index: 100;
+      background: #000;
     }
 
     .event-img {
       width: 100%;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      border: 1px solid #666;
+      height: 360px; /* Taller images */
+      object-fit: cover;
+      object-position: top center;
+      border: 1px solid #333;
+      margin-bottom: 15px;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .event h2 {
+      font-size: 18px;
+      margin: 10px 0 5px;
+      line-height: 1.3;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p {
+      margin: 3px 0;
+      font-size: 13px;
+      color: #999;
     }
 
     .reserve {
       display: inline-block;
-      margin-top: 10px;
-      padding: 10px 25px;
-      border: 1px solid white;
-      color: white;
+      margin-top: 15px;
+      padding: 12px 35px;
+      background: white;
+      color: black;
       text-decoration: none;
-      transition: 0.2s;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      cursor: pointer;
     }
 
     .reserve:hover {
-      background: white;
-      color: black;
+      background: #ccc;
+      box-shadow: 0 0 20px rgba(255,255,255,0.4);
+      transform: translateY(-2px);
     }
 
-    p {
-      margin: 6px 0;
-      opacity: 0.9;
-    }
-
-    /* Sticky ad footer */
-    .ad-footer {
-      width: 100%;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      z-index: 9999;
-      background: rgba(0,0,0,0.7);
-      padding: 10px 0;
-    }
-
-    .ad-footer iframe {
-      width: 70%;
-      max-width: 800px;
-      min-height: 90px;
-      border: 0;
-    }
-
-    .ad-close {
+    /* --- NAVIGATION ARROWS --- */
+    .nav-btn {
       position: absolute;
-      top: 50%;
-      right: 24px;
+      top: 50%; 
       transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-size: 40px;
       cursor: pointer;
-      background: rgba(248,248,249,0.7);
-      border-radius: 4px;
-      padding: 4px;
-      z-index: 10000;
+      z-index: 200;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
     }
 
-    .ad-close svg {
-      width: 16px;
-      height: 16px;
-      fill: #000;
+    .nav-btn:hover {
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+      text-shadow: 0 0 15px white;
     }
 
-    #ad-toggle:checked + .ad-footer {
-      display: none;
+    .prev-btn { left: 5vw; }
+    .next-btn { right: 5vw; }
+
+    /* --- RESPONSIVE LOGIC --- */
+    
+    /* 
+       Only scale down if the screen height is less than 750px (typical laptop).
+       Otherwise, keep it big.
+    */
+    @media (max-height: 750px) {
+      .scene {
+        transform: scale(0.85);
+      }
+    }
+    
+    @media (max-height: 600px) {
+      .scene {
+        transform: scale(0.7);
+      }
+      h1 { font-size: 20px; }
+    }
+
+    @media (max-width: 600px) {
+      .prev-btn { left: 10px; }
+      .next-btn { right: 10px; }
+      .scene { width: 300px; height: 500px; } 
+      .event { width: 300px; height: 500px; }
+      .event-img { height: 300px; }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>UPCOMING TECHNO EVENTS</h1>
+  <div class="header-container">
+    <h1>UPCOMING TECHNO EVENTS</h1>
+    <a href="index.html" class="button">← BACK TO HOME</a>
+  </div>
 
-  <a href="index.html" class="button">← Back to Home</a>
+  <!-- Navigation -->
+  <div class="nav-btn prev-btn" id="prevBtn">&#10094;</div>
+  <div class="nav-btn next-btn" id="nextBtn">&#10095;</div>
 
-  <div class="events-container">
+  <div class="scene">
+    <div class="carousel" id="carousel">
 
+      <!-- Event 1 -->
+      <div class="event">
+        <img src="https://i.ibb.co/35QdD20F/Recreate-the-input-202602171347.jpg" class="event-img">
+        <h2>Eid Al-Fitr Eve (Wa2fa)</h2>
+        <p>Ain Al Hayat, Cairo</p>
+        <p>09 PM - 4 AM</p>
+        <a href="https://forms.gle/fBY7wix1Fe2o6859A" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="event">
+        <img src="https://i.ibb.co/8Lgf45VD/Recreate-the-input-202602171325.jpg" class="event-img">
+        <h2>21 March 2026</h2>
+        <p>Il Monte Galala</p>
+        <p>08:00 + 8H</p>
+        <a href="https://ticketegypt.venflare.com/events/1144680f-af24-4ea7-8aea-73f92c4ff2a6/tickets" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="event">
+        <img src="https://i.ibb.co/7tQp5vQG/Recreate-the-input-202602171327.jpg" class="event-img">
+        <h2>21 March 2026</h2>
+        <p>Ain El Sokhna - Palm Beach</p>
+        <a href="https://www.ulterbooking.com/home/events/6dbc4edc-ae63-46ab-a2ca-83d21c8bb168/#tickets" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 4 -->
+      <div class="event">
+        <img src="https://i.ibb.co/PzbZhMXF/Recreate-the-input-202602171328.jpg" class="event-img">
+        <h2>22 March 2026</h2>
+        <p>Human Figures Platform</p>
+        <a href="https://ticketegypt.venflare.com/events/03e05beb-9280-4cee-928e-c12bc8257d23/tickets" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 5 -->
+      <div class="event">
+        <img src="https://i.ibb.co/VWN1mbkJ/Recreate-the-input-202602171710.jpg" class="event-img">
+        <h2>April 24 – April 26</h2>
+        <p>Great Pyramids of Giza</p>
+        <a href="https://www.technoandchill.com/events/n9uCHrnl0V" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 6 -->
+      <div class="event">
+        <img src="https://i.ibb.co/Q7gpk7dC/Recreate-the-input-2k-202602171336.jpg" class="event-img">
+        <h2>7 May - 9 May</h2>
+        <p>El Gouna</p>
+        <a href="#" class="reserve" style="background:transparent; border:1px solid #555; color:#555; pointer-events:none;">SOON</a>
+      </div>
+
+      <!-- Event 7 -->
+      <div class="event">
+        <img src="https://i.ibb.co/MkKwWZn0/Recreate-the-input-2k-202602171342.jpg" class="event-img">
+        <h2>Fri 24 July 2026</h2>
+        <p>North Coast, Egypt</p>
+        <a href="https://ticketegypt.venflare.com/events/f4a9412f-a660-4b1c-ab3a-9d9c52ca1430" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 8 -->
+      <div class="event">
+        <img src="https://i.ibb.co/20g7d1gR/image-1.png" class="event-img">
+        <h2>21.08.2026</h2>
+        <p>North Coast, Egypt</p>
+        <a href="https://ticketegypt.venflare.com/events/d42c024a-96cd-447d-a666-b3f6ceff7055/tickets" target="_blank" class="reserve">RESERVE</a>
+      </div>
+
+      <!-- Event 9 -->
+      <div class="event">
+        <img src="https://i.ibb.co/N290ZZVG/A-hypercinematic-editorialstyle-2k-20260217.jpg" class="event-img">
+        <h2>More Events</h2>
+        <p>Explore All</p>
+        <a href="https://platinumlist.net/aff/?ref=zdg5mtn&link=" target="_blank" class="reserve">MORE</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const cells = Array.from(carousel.querySelectorAll('.event'));
+    const cellCount = cells.length;
+    let selectedIndex = 0;
     
-
+    // Width of the card + gap
+    const cardWidth = 340; 
+    const gap = 60; 
     
-
+    // Calculated radius to prevent overlapping
+    const radius = Math.round( (cardWidth + gap) / 2 / Math.tan( Math.PI / cellCount ) );
     
+    const theta = 360 / cellCount;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
+    function rotateCarousel() {
+      const angle = selectedIndex * -theta;
+      carousel.style.transform = `translateZ(-${radius}px) rotateY(${angle}deg)`;
+      
+      const activeIndex = (selectedIndex % cellCount + cellCount) % cellCount;
+
+      cells.forEach((cell, i) => {
+        if(i === activeIndex) {
+          cell.classList.add('active');
+        } else {
+          cell.classList.remove('active');
+        }
+      });
+    }
+
+    // Set initial positions
+    cells.forEach((cell, i) => {
+      cell.style.transform = `rotateY(${theta * i}deg) translateZ(${radius}px)`;
+    });
     
+    // Start
+    rotateCarousel();
 
+    prevBtn.addEventListener('click', () => {
+      selectedIndex--;
+      rotateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      selectedIndex++;
+      rotateCarousel();
+    });
     
-
-    
-    
-
-    
-    <div class="event">
-      <img src="https://i.ibb.co/35QdD20F/Recreate-the-input-202602171347.jpg" class="event-img">
-      <h2>Eid Al-Fitr Eve (Wa2fa Night) — March</h2>
-      <p>VENUE: Ain Al Hayat, Cairo</p>
-      <p>TIME: From 09 PM to 4 AM</p>
-      <a href="https://forms.gle/fBY7wix1Fe2o6859A" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/8Lgf45VD/Recreate-the-input-202602171325.jpg" class="event-img">
-      <h2>21 March 2026</h2>
-      <p>VENUE: Il Monte Galala</p>
-      <p>TIME: From 08:00 + 8H</p>
-      <a href="https://ticketegypt.venflare.com/events/1144680f-af24-4ea7-8aea-73f92c4ff2a6/tickets" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/7tQp5vQG/Recreate-the-input-202602171327.jpg" class="event-img">
-      <h2>21 March 2026</h2>
-      <p>VENUE: Ain El Sokhna - Palm Beach</p>
-      <a href="https://www.ulterbooking.com/home/events/6dbc4edc-ae63-46ab-a2ca-83d21c8bb168/#tickets" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/PzbZhMXF/Recreate-the-input-202602171328.jpg" class="event-img">
-      <h2>22 March 2026</h2>
-      <p>VENUE: Human Figures Platform, Somabay</p>
-      <a href="https://ticketegypt.venflare.com/events/03e05beb-9280-4cee-928e-c12bc8257d23/tickets" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/3mF8qCTt/Recreate-the-input-202602171330.jpg" class="event-img">
-      <h2>April 24 – April 26</h2>
-      <p>VENUE: The Great Pyramids of Giza</p>
-      <a href="https://www.technoandchill.com/events/n9uCHrnl0V" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/Q7gpk7dC/Recreate-the-input-2k-202602171336.jpg" class="event-img">
-      <h2>Thu 7 May 2026 - Sat 9 May 2026</h2>
-      <p>VENUE: El Gouna</p>
-      <a href=" " target="_blank" class="reserve">Soon</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/MkKwWZn0/Recreate-the-input-2k-202602171342.jpg" class="event-img">
-      <h2>Fri 24 July 2026 </h2>
-      <p>VENUE: North Coast, Egypt</p>
-      <a href="https://ticketegypt.venflare.com/events/f4a9412f-a660-4b1c-ab3a-9d9c52ca1430" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/20g7d1gR/image-1.png" class="event-img">
-      <h2>21.08.2026 </h2>
-      <p>VENUE: North Coast, Egypt</p>
-      <a href="https://ticketegypt.venflare.com/events/d42c024a-96cd-447d-a666-b3f6ceff7055/tickets" target="_blank" class="reserve">Reserve Spot</a>
-    </div>
-
-    <div class="event">
-      <img src="https://i.ibb.co/N290ZZVG/A-hypercinematic-editorialstyle-2k-20260217.jpg" class="event-img">
-      <h2>More Events & Attractions & Experiences </h2>
-      <a href="https://platinumlist.net/aff/?ref=zdg5mtn&link=" target="_blank" class="reserve">More</a>
-    </div>
-
-  
-
-  
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        selectedIndex--;
+        rotateCarousel();
+      } else if (e.key === 'ArrowRight') {
+        selectedIndex++;
+        rotateCarousel();
+      }
+    });
+  </script>
 
 </body>
 </html>
