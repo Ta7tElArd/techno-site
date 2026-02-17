@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TA7TELARD BLOGS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLOGS | TA7TELARD</title>
+
+  <!-- Google Fonts: Oswald & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGH1LLK5SH"></script>
@@ -14,206 +20,153 @@
   </script>
 
   <style>
-    body {
+    /* --- RESET & BASE --- */
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 40px 20px;
-      background: black;
-      color: white;
-      font-family: monospace;
-      text-align: center;
-      letter-spacing: 1px;
+      padding: 0;
     }
 
+    body {
+      background-color: #000;
+      /* Luxury Gradient matching Home page */
+      background: radial-gradient(circle at 50% 50%, #1a0000 0%, #000000 100%);
+      color: #ededed;
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* --- CONTENT WRAPPER --- */
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      z-index: 2;
+    }
+
+    /* --- TYPOGRAPHY --- */
     h1 {
-      font-size: 32px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 50px;
+      letter-spacing: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: white;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .tagline {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #cc0000; /* Signature Red */
+      margin-bottom: 60px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    /* --- COMING SOON SECTION --- */
+    .status-box {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 0;
+      margin-bottom: 60px;
+    }
+
+    .status-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: #fff;
       margin-bottom: 10px;
     }
 
-    p {
-      opacity: 0.7;
-      margin-bottom: 30px;
-    }
-
-    a.button {
-      display: inline-block;
-      margin-bottom: 30px;
-      padding: 12px 30px;
-      border: 1px solid white;
-      color: white;
-      text-decoration: none;
+    .sub-status {
+      font-size: 12px;
       letter-spacing: 2px;
-      transition: 0.2s;
+      color: #666;
+      text-transform: uppercase;
     }
 
-    a.button:hover {
-      background: white;
-      color: black;
+    /* --- BUTTONS --- */
+    a.btn-back {
+      display: inline-block;
+      padding: 12px 30px;
+      border: 1px solid #cc0000;
+      color: #cc0000;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      background: transparent;
     }
 
-    .posts {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
+    a.btn-back:hover {
+      background: #cc0000;
+      color: white;
+      box-shadow: 0 0 25px rgba(204, 0, 0, 0.5);
+      transform: translateY(-3px);
     }
 
-    .post {
-      background: #111;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #333;
-      width: 320px;
-    }
-
-    iframe, blockquote {
-      max-width: 100%;
-    }
-
-    /* crypto ad container */
-    .ad-container {
+    /* --- DECORATIVE ELEMENTS --- */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 800px;
-      margin: 20px auto;
-      position: relative;
-      z-index: 20; /* ensure it's above anything */
+      height: 100%;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+      z-index: 10;
     }
 
-    .ad-container iframe {
-      width: 70%;
-      height: auto;
-      border: 0;
-      display: block;
-      margin: auto;
-      overflow: hidden;
+    /* Subtle pulse animation for the red text */
+    @keyframes pulse {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; text-shadow: 0 0 15px rgba(204, 0, 0, 0.8); }
+      100% { opacity: 0.8; }
+    }
+
+    .pulse {
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 36px; letter-spacing: 8px; }
+      .tagline { font-size: 11px; }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>BLOGS</h1>
-  <p>Underground moments & selected posts</p>
+  <!-- Subtle CRT Scanline effect for "Underground" vibe -->
+  <div class="scanline"></div>
 
-  <a href="index.html" class="button">← Back to Home</a>
-
-  
-
-  <div class="posts">
-
-    <!-- Instagram Embed 1 -->
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUfqJX6Dc34/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUgcFKvDepq/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUiXWxfDPag/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUkklU-DYB_/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUnGcYvDbwD/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUnneFGDK4y/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUoKjTcDYOM/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUpz-09jXnT/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUlP_unDdyP/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUqJnaPjBUP/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUvK00OjX69/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUvRdlvjQlf/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
-    <div class="post">
-      <blockquote 
-        class="instagram-media" 
-        data-instgrm-permalink="https://www.instagram.com/p/DUvn3sgjHJw/" 
-        data-instgrm-version="14">
-      </blockquote>
-    </div>
-
+  <div class="container">
     
+    <h1>BLOGS</h1>
+    <p class="tagline">The Underground Archives</p>
 
+    <div class="status-box">
+      <div class="status-text pulse">SOON ENOUGH</div>
+      <div class="sub-status">Journal Access Restricted</div>
+    </div>
 
-    
+    <a href="index.html" class="btn-back">
+      ← Return to Main
+    </a>
 
   </div>
-
-  <!-- Instagram Embed Script -->
-  <script async src="https://www.instagram.com/embed.js"></script>
 
 </body>
 </html>
