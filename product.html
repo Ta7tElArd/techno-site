@@ -36,6 +36,33 @@
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+      position: relative; /* Needed for absolute positioning context */
+    }
+
+    /* --- BACK BUTTON (FIXED) --- */
+    a.back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      color: #888;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      border: 1px solid #333;
+      padding: 8px 20px;
+      transition: 0.3s;
+      
+      /* KEY FIX: High Z-Index to sit above everything */
+      z-index: 9999; 
+      cursor: pointer;
+      background: rgba(0,0,0,0.5); /* Slight background to ensure clickability */
+    }
+
+    a.back-btn:hover {
+      border-color: #fff;
+      color: #fff;
+      background: #000;
     }
 
     /* --- HEADER --- */
@@ -43,7 +70,8 @@
       padding: 40px 20px;
       text-align: center;
       width: 100%;
-      z-index: 10;
+      z-index: 1;
+      margin-top: 10px; /* Space for the button on mobile */
     }
 
     h1 {
@@ -63,26 +91,6 @@
       font-weight: 600;
     }
 
-    a.back-btn {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      color: #666;
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 14px;
-      letter-spacing: 2px;
-      border: 1px solid #333;
-      padding: 8px 20px;
-      transition: 0.3s;
-    }
-
-    a.back-btn:hover {
-      border-color: #fff;
-      color: #fff;
-      background: #000;
-    }
-
     /* --- PRODUCT GRID --- */
     .product-grid {
       display: flex;
@@ -92,6 +100,7 @@
       max-width: 1200px;
       padding: 20px;
       padding-bottom: 80px;
+      z-index: 2;
     }
 
     .product-card {
@@ -205,7 +214,13 @@
     }
 
     @media (max-width: 600px) {
-      a.back-btn { top: 20px; left: 20px; padding: 5px 15px; font-size: 11px; }
+      /* Adjusted mobile position so it's not too close to the edge */
+      a.back-btn { 
+        top: 15px; 
+        left: 15px; 
+        padding: 8px 15px; 
+        font-size: 12px; 
+      }
       .product-card { width: 100%; }
       h1 { font-size: 28px; margin-top: 40px; }
     }
@@ -214,6 +229,7 @@
 
 <body>
 
+  <!-- Ensure this file exists: index.html -->
   <a href="index.html" class="back-btn">← BACK</a>
 
   <div class="header">
@@ -223,18 +239,15 @@
 
   <div class="product-grid">
 
-    <!-- Product 1: T-Shirt -->
+    <!-- Product 1 -->
     <div class="product-card">
       <div class="img-placeholder">
-        <!-- Replace src with your image URL -->
-        <img src="https://i.ibb.co/DP3f0KyG/metadata-2k-202602181550.jpg" alt="Glasses">
+        <img src="https://i.ibb.co/DP3f0KyG/metadata-2k-202602181550.jpg" alt="PolarX">
       </div>
       <h3 class="product-title">PolarX</h3>
       <p class="product-price">EGP 499.00</p>
-      <a href="https://amzn.to/40guF0t" class="buy-btn">ORDER NOW</a>
+      <a href="https://amzn.to/40guF0t" class="buy-btn" target="_blank">ORDER NOW</a>
     </div>
-
-    
 
   </div>
 
