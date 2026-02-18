@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SHOP | TA7TELARD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGH1LLK5SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SGH1LLK5SH');
+  </script>
+
+  <style>
+    /* --- RESET & BASE --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #050505;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      padding: 40px 20px;
+      text-align: center;
+      width: 100%;
+      z-index: 10;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 36px;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    p.subtitle {
+      color: #cc0000;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    a.back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      color: #666;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      border: 1px solid #333;
+      padding: 8px 20px;
+      transition: 0.3s;
+    }
+
+    a.back-btn:hover {
+      border-color: #fff;
+      color: #fff;
+      background: #000;
+    }
+
+    /* --- PRODUCT GRID --- */
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+
+    .product-card {
+      width: 300px;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      border-color: #333;
+    }
+
+    /* Hover Glow Effect */
+    .product-card:hover::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      box-shadow: 0 0 20px rgba(204, 0, 0, 0.15); /* Red Glow */
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      height: 300px;
+      background: #111;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      transition: 0.4s;
+      filter: grayscale(100%);
+    }
+
+    .product-card:hover .img-placeholder img {
+      opacity: 1;
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .product-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    .product-price {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+      font-family: monospace;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px 0;
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    /* Variants */
+    .sold-out .buy-btn {
+      border-color: #333;
+      color: #555;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    .sold-out .img-placeholder::before {
+      content: 'SOLD OUT';
+      position: absolute;
+      color: white;
+      z-index: 5;
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      letter-spacing: 4px;
+      background: rgba(0,0,0,0.7);
+      padding: 5px 15px;
+      border: 1px solid white;
+      transform: rotate(-15deg);
+    }
+
+    @media (max-width: 600px) {
+      a.back-btn { top: 20px; left: 20px; padding: 5px 15px; font-size: 11px; }
+      .product-card { width: 100%; }
+      h1 { font-size: 28px; margin-top: 40px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="index.html" class="back-btn">← BACK</a>
+
+  <div class="header">
+    <h1>MERCH ARCHIVE</h1>
+    <p class="subtitle">Limited Edition / Underground Wear</p>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- Product 1: T-Shirt -->
+    <div class="product-card">
+      <div class="img-placeholder">
+        <!-- Replace src with your image URL -->
+        <img src="https://i.ibb.co/DP3f0KyG/metadata-2k-202602181550.jpg" alt="Glasses">
+      </div>
+      <h3 class="product-title">PolarX</h3>
+      <p class="product-price">EGP 499.00</p>
+      <a href="https://amzn.to/40guF0t" class="buy-btn">ORDER NOW</a>
+    </div>
+
+    
+
+  </div>
+
+</body>
+</html>
