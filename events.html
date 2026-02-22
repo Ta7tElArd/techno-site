@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UPCOMING TECHNO EVENTS - 3D</title>
+  <title>UPCOMING EVENTS | TA7TELARD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGH1LLK5SH"></script>
@@ -13,367 +18,497 @@
     gtag('js', new Date());
     gtag('config', 'G-SGH1LLK5SH');
   </script>
-  
+
   <style>
+    /* --- RESET & BASE --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      padding: 0;
-      background: #050505; /* Deep black background */
+      background-color: #050505;
       color: white;
-      font-family: 'Courier New', Courier, monospace;
-      text-align: center;
-      overflow: hidden; /* Prevents scrollbars */
-      height: 100vh;
-      width: 100vw;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* Forces vertical centering */
+      padding-bottom: 50px;
     }
 
-    /* Header pushed to top */
-    .header-container {
-      position: absolute;
-      top: 20px;
+    /* --- HEADER --- */
+    .header {
       width: 100%;
-      z-index: 20;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
     }
 
     h1 {
-      font-size: 28px;
-      margin: 0 0 15px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 32px;
+      letter-spacing: 4px;
       text-transform: uppercase;
-      letter-spacing: 5px;
-      text-shadow: 0 0 15px rgba(255,255,255,0.4);
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
 
-    a.button {
+    a.back-home {
       display: inline-block;
-      padding: 8px 20px;
-      border: 1px solid #444;
-      color: #bbb;
-      text-decoration: none;
+      margin-bottom: 20px;
       font-size: 12px;
-      letter-spacing: 2px;
-      transition: 0.3s;
-      background: rgba(0,0,0,0.8);
-    }
-
-    a.button:hover {
-      border-color: white;
-      color: white;
-      background: #111;
-    }
-
-    /* --- 3D SCENE --- */
-    .scene {
-      position: relative;
-      /* Restored to Larger Dimensions */
-      width: 340px;
-      height: 560px;
-      perspective: 1200px;
-      margin-top: 40px; /* Slight offset from header */
-      transition: transform 0.3s ease;
-    }
-
-    .carousel {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); /* Smooth 'Apple-like' ease */
-    }
-
-    .event {
-      position: absolute;
-      width: 340px;
-      height: 560px;
-      left: 0;
-      top: 0;
-      background: #080808;
+      color: #888;
+      text-decoration: none;
       border: 1px solid #333;
-      box-sizing: border-box;
-      padding: 15px;
-      text-align: center;
-      backface-visibility: hidden;
-      
-      /* Hidden State */
-      opacity: 0.05; 
-      transform: scale(0.9);
-      transition: opacity 0.6s, transform 0.6s, box-shadow 0.6s;
-      pointer-events: none;
+      padding: 8px 16px;
+      transition: 0.3s;
     }
 
-    /* Active State (The one facing you) */
-    .event.active {
-      opacity: 1;
-      transform: scale(1);
-      box-shadow: 0 0 50px rgba(255, 255, 255, 0.15);
-      border-color: #777;
-      pointer-events: auto;
-      z-index: 100;
-      background: #000;
+    a.back-home:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+
+    /* --- NAVIGATION / BREADCRUMBS --- */
+    .nav-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 30px;
+      min-height: 40px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid #cc0000;
+      color: #cc0000;
+      padding: 10px 20px;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: none; /* Hidden by default */
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .nav-btn:hover {
+      background: #cc0000;
+      color: white;
+    }
+
+    /* --- SELECTION CONTAINERS --- */
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    h2.step-title {
+      font-size: 14px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* --- MONTH GRID --- */
+    .month-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .month-card {
+      width: 140px;
+      height: 100px;
+      background: #111;
+      border: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .month-card:hover {
+      border-color: #cc0000;
+      background: #1a0000;
+      transform: translateY(-5px);
+    }
+
+    .month-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    .month-year {
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* --- CALENDAR GRID (DAYS) --- */
+    .calendar-grid {
+      display: none; /* Hidden initially */
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .day-cell {
+      aspect-ratio: 1;
+      background: #0a0a0a;
+      border: 1px solid #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      color: #333; /* Grayed out by default */
+      cursor: default;
+      transition: 0.2s;
+    }
+
+    /* Active Days (Have Events) */
+    .day-cell.has-event {
+      color: #fff;
+      border-color: #666;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .day-cell.has-event::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      width: 4px;
+      height: 4px;
+      background: #cc0000;
+      border-radius: 50%;
+    }
+
+    .day-cell.has-event:hover {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    .day-cell.selected {
+      background: #cc0000 !important;
+      color: white !important;
+      border-color: #cc0000;
+    }
+
+    /* --- EVENT DISPLAY --- */
+    .event-list {
+      display: none; /* Hidden initially */
+      margin-top: 40px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .event-card {
+      background: #111;
+      border: 1px solid #333;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto 20px;
+      text-align: left;
     }
 
     .event-img {
       width: 100%;
-      height: 360px; /* Taller images */
+      height: 200px;
       object-fit: cover;
-      object-position: top center;
-      border: 1px solid #333;
       margin-bottom: 15px;
-      display: block;
-      border-radius: 2px;
+      border-bottom: 1px solid #333;
     }
 
-    .event h2 {
-      font-size: 18px;
-      margin: 10px 0 5px;
-      line-height: 1.3;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    p {
-      margin: 3px 0;
-      font-size: 13px;
-      color: #999;
-    }
-
-    .reserve {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 35px;
-      background: white;
-      color: black;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-
-    .reserve:hover {
-      background: #ccc;
-      box-shadow: 0 0 20px rgba(255,255,255,0.4);
-      transform: translateY(-2px);
-    }
-
-    /* --- NAVIGATION ARROWS --- */
-    .nav-btn {
-      position: absolute;
-      top: 50%; 
-      transform: translateY(-50%);
-      width: 60px;
-      height: 60px;
-      background: transparent;
-      border: none;
-      color: rgba(255,255,255,0.4);
-      font-size: 40px;
-      cursor: pointer;
-      z-index: 200;
-      transition: 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-
-    .nav-btn:hover {
+    .event-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      margin-bottom: 5px;
       color: white;
-      transform: translateY(-50%) scale(1.1);
-      text-shadow: 0 0 15px white;
     }
 
-    .prev-btn { left: 5vw; }
-    .next-btn { right: 5vw; }
-
-    /* --- RESPONSIVE LOGIC --- */
-    
-    /* 
-       Only scale down if the screen height is less than 750px (typical laptop).
-       Otherwise, keep it big.
-    */
-    @media (max-height: 750px) {
-      .scene {
-        transform: scale(0.85);
-      }
-    }
-    
-    @media (max-height: 600px) {
-      .scene {
-        transform: scale(0.7);
-      }
-      h1 { font-size: 20px; }
+    .event-info {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 5px;
     }
 
-    @media (max-width: 600px) {
-      .prev-btn { left: 10px; }
-      .next-btn { right: 10px; }
-      .scene { width: 300px; height: 500px; } 
-      .event { width: 300px; height: 500px; }
-      .event-img { height: 300px; }
+    .reserve-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #cc0000;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .reserve-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      .calendar-grid { gap: 5px; }
+      .day-cell { font-size: 14px; }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="header-container">
-    <h1>UPCOMING TECHNO EVENTS</h1>
-    <a href="index.html" class="button">← BACK TO HOME</a>
+  <div class="header">
+    <h1>EVENTS CALENDAR</h1>
+    <a href="index.html" class="back-home">← BACK TO HOME</a>
   </div>
 
-  <!-- Navigation -->
-  <div class="nav-btn prev-btn" id="prevBtn">&#10094;</div>
-  <div class="nav-btn next-btn" id="nextBtn">&#10095;</div>
+  <div class="container">
 
-  <div class="scene">
-    <div class="carousel" id="carousel">
-
-      <!-- Event 1 -->
-      <div class="event">
-        <img src="https://i.ibb.co/35QdD20F/Recreate-the-input-202602171347.jpg" class="event-img">
-        <h2>Eid Al-Fitr Eve (Wa2fa)</h2>
-        <p>Ain Al Hayat, Cairo</p>
-        <p>09 PM - 4 AM</p>
-        <a href="https://forms.gle/fBY7wix1Fe2o6859A" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 1 -->
-      <div class="event">
-        <img src="https://i.ibb.co/Zj9p3PZ/Recreate-the-input-202602212140.jpg" class="event-img">
-        <h2>Fri, Mar 20</h2>
-        <p>EL Gouna Oasis</p>
-        <p>08 PM - 4 AM</p>
-        <a href="https://forms.gle/obZaK1e11kUU1VnG7" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 2 -->
-      <div class="event">
-        <img src="https://i.ibb.co/8Lgf45VD/Recreate-the-input-202602171325.jpg" class="event-img">
-        <h2>21 March 2026</h2>
-        <p>Il Monte Galala</p>
-        <p>08:00 + 8H</p>
-        <a href="https://ticketegypt.venflare.com/events/1144680f-af24-4ea7-8aea-73f92c4ff2a6/tickets" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 3 -->
-      <div class="event">
-        <img src="https://i.ibb.co/7tQp5vQG/Recreate-the-input-202602171327.jpg" class="event-img">
-        <h2>21 March 2026</h2>
-        <p>Ain El Sokhna - Palm Beach</p>
-        <a href="https://www.ulterbooking.com/home/events/6dbc4edc-ae63-46ab-a2ca-83d21c8bb168/#tickets" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 4 -->
-      <div class="event">
-        <img src="https://i.ibb.co/PzbZhMXF/Recreate-the-input-202602171328.jpg" class="event-img">
-        <h2>22 March 2026</h2>
-        <p>Human Figures Platform</p>
-        <a href="https://ticketegypt.venflare.com/events/03e05beb-9280-4cee-928e-c12bc8257d23/tickets" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 5 -->
-      <div class="event">
-        <img src="https://i.ibb.co/VWN1mbkJ/Recreate-the-input-202602171710.jpg" class="event-img">
-        <h2>April 24 – April 26</h2>
-        <p>Great Pyramids of Giza</p>
-        <a href="https://www.technoandchill.com/events/n9uCHrnl0V" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 6 -->
-      <div class="event">
-        <img src="https://i.ibb.co/Q7gpk7dC/Recreate-the-input-2k-202602171336.jpg" class="event-img">
-        <h2>7 May - 9 May</h2>
-        <p>El Gouna</p>
-        <a href="#" class="reserve" style="background:transparent; border:1px solid #555; color:#555; pointer-events:none;">SOON</a>
-      </div>
-
-      <!-- Event 7 -->
-      <div class="event">
-        <img src="https://i.ibb.co/MkKwWZn0/Recreate-the-input-2k-202602171342.jpg" class="event-img">
-        <h2>Fri 24 July 2026</h2>
-        <p>North Coast, Egypt</p>
-        <a href="https://ticketegypt.venflare.com/events/f4a9412f-a660-4b1c-ab3a-9d9c52ca1430" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      <!-- Event 8 -->
-      <div class="event">
-        <img src="https://i.ibb.co/20g7d1gR/image-1.png" class="event-img">
-        <h2>21.08.2026</h2>
-        <p>North Coast, Egypt</p>
-        <a href="https://ticketegypt.venflare.com/events/d42c024a-96cd-447d-a666-b3f6ceff7055/tickets" target="_blank" class="reserve">RESERVE</a>
-      </div>
-
-      
-
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+      <button id="backToMonths" class="nav-btn">← Choose Month</button>
     </div>
+
+    <!-- STEP 1: MONTH SELECTION -->
+    <div id="monthView">
+      <h2 class="step-title">Select a Month</h2>
+      <div class="month-grid" id="monthGrid">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <!-- STEP 2: DAY SELECTION -->
+    <div id="dayView" style="display:none;">
+      <h2 class="step-title" id="selectedMonthTitle">Month</h2>
+      <div class="calendar-grid" id="calendarGrid">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <!-- STEP 3: EVENT DISPLAY -->
+    <div id="eventDisplay" class="event-list">
+      <!-- Generated by JS -->
+    </div>
+
   </div>
 
   <script>
-    const carousel = document.getElementById('carousel');
-    const cells = Array.from(carousel.querySelectorAll('.event'));
-    const cellCount = cells.length;
-    let selectedIndex = 0;
-    
-    // Width of the card + gap
-    const cardWidth = 340; 
-    const gap = 60; 
-    
-    // Calculated radius to prevent overlapping
-    const radius = Math.round( (cardWidth + gap) / 2 / Math.tan( Math.PI / cellCount ) );
-    
-    const theta = 360 / cellCount;
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    // --- DATABASE ---
+    // Update specific dates here. Format: "YYYY-M-D" (No leading zeros for single digits to keep logic simple)
+    const eventsDB = [
+      {
+        date: "2026-3-19",
+        title: "fracture",
+        venue: "Ain Al Hayat, Cairo",
+        time: "09 PM - 4 AM",
+        img: "https://i.ibb.co/35QdD20F/Recreate-the-input-202602171347.jpg",
+        link: "https://forms.gle/fBY7wix1Fe2o6859A"
+      },
+      {
+        date: "2026-3-20",
+        title: "Cave Rave",
+        venue: "El Gouna Oasis",
+        time: "08 PM - 4 AM",
+        img: "https://i.ibb.co/Zj9p3PZ/Recreate-the-input-202602212140.jpg",
+        link: "https://forms.gle/obZaK1e11kUU1VnG7"
+      },
+      {
+        date: "2026-3-21",
+        title: "The Moment",
+        venue: "Il Monte Galala",
+        time: "08:00 + 6H",
+        img: "https://i.ibb.co/8Lgf45VD/Recreate-the-input-202602171325.jpg",
+        link: "https://ticketegypt.venflare.com/events/1144680f-af24-4ea7-8aea-73f92c4ff2a6/tickets"
+      },
+      {
+        date: "2026-3-21", // Second event same day
+        title: "ULTER",
+        venue: "Palm Beach Sokhna",
+        time: " ",
+        img: "https://i.ibb.co/7tQp5vQG/Recreate-the-input-202602171327.jpg",
+        link: "https://www.ulterbooking.com/home/events/6dbc4edc-ae63-46ab-a2ca-83d21c8bb168/#tickets"
+      },
+      {
+        date: "2026-3-22",
+        title: "No Art",
+        venue: "Somabay - Human Figures Platform",
+        time: "8 PM + 9H",
+        img: "https://i.ibb.co/PzbZhMXF/Recreate-the-input-202602171328.jpg",
+        link: "https://ticketegypt.venflare.com/events/03e05beb-9280-4cee-928e-c12bc8257d23/tickets"
+      },
+      {
+        date: "2026-4-24",
+        title: "Zamna",
+        venue: "Great Pyramids of Giza",
+        time: "April 24 - 26",
+        img: "https://i.ibb.co/3mF8qCTt/Recreate-the-input-202602171330.jpg",
+        link: "https://www.technoandchill.com/events/n9uCHrnl0V"
+      },
+      {
+        date: "2026-5-7",
+        title: "Sandbox Festival",
+        venue: "El Gouna",
+        time: "May 7 - 9",
+        img: "https://i.ibb.co/Q7gpk7dC/Recreate-the-input-2k-202602171336.jpg",
+        link: "#" // Soon
+      },
+      {
+        date: "2026-7-24",
+        title: "Adriatique",
+        venue: "North Coast, Egypt",
+        time: "9 PM + 5H",
+        img: "https://i.ibb.co/MkKwWZn0/Recreate-the-input-2k-202602171342.jpg",
+        link: "https://ticketegypt.venflare.com/events/f4a9412f-a660-4b1c-ab3a-9d9c52ca1430"
+      },
+      {
+        date: "2026-8-21",
+        title: "Black Coffee",
+        venue: "North Coast, Egypt",
+        time: "9 PM + 5H",
+        img: "https://i.ibb.co/20g7d1gR/image-1.png",
+        link: "https://ticketegypt.venflare.com/events/d42c024a-96cd-447d-a666-b3f6ceff7055/tickets"
+      }
+    ];
 
-    function rotateCarousel() {
-      const angle = selectedIndex * -theta;
-      carousel.style.transform = `translateZ(-${radius}px) rotateY(${angle}deg)`;
+    // --- LOGIC ---
+    
+    // 1. Extract Unique Months from Data
+    const monthNames = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    
+    let activeMonths = []; // format: { year: 2026, month: 3 }
+
+    eventsDB.forEach(ev => {
+      const parts = ev.date.split('-');
+      const y = parseInt(parts[0]);
+      const m = parseInt(parts[1]);
       
-      const activeIndex = (selectedIndex % cellCount + cellCount) % cellCount;
+      const exists = activeMonths.find(am => am.year === y && am.month === m);
+      if (!exists) {
+        activeMonths.push({ year: y, month: m });
+      }
+    });
 
-      cells.forEach((cell, i) => {
-        if(i === activeIndex) {
-          cell.classList.add('active');
-        } else {
-          cell.classList.remove('active');
-        }
+    // Sort months chronologically
+    activeMonths.sort((a, b) => {
+      if (a.year !== b.year) return a.year - b.year;
+      return a.month - b.month;
+    });
+
+    const monthView = document.getElementById('monthView');
+    const monthGrid = document.getElementById('monthGrid');
+    const dayView = document.getElementById('dayView');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const eventDisplay = document.getElementById('eventDisplay');
+    const backBtn = document.getElementById('backToMonths');
+    const selectedMonthTitle = document.getElementById('selectedMonthTitle');
+
+    // 2. Render Month Buttons
+    function renderMonths() {
+      monthGrid.innerHTML = '';
+      activeMonths.forEach(am => {
+        const div = document.createElement('div');
+        div.className = 'month-card';
+        div.innerHTML = `
+          <span class="month-name">${monthNames[am.month]}</span>
+          <span class="month-year">${am.year}</span>
+        `;
+        div.onclick = () => showDays(am.year, am.month);
+        monthGrid.appendChild(div);
       });
     }
 
-    // Set initial positions
-    cells.forEach((cell, i) => {
-      cell.style.transform = `rotateY(${theta * i}deg) translateZ(${radius}px)`;
-    });
-    
-    // Start
-    rotateCarousel();
+    // 3. Render Calendar Days
+    function showDays(year, month) {
+      // Hide month view, show day view
+      monthView.style.display = 'none';
+      dayView.style.display = 'block';
+      eventDisplay.style.display = 'none';
+      eventDisplay.innerHTML = '';
+      backBtn.style.display = 'block';
+      
+      selectedMonthTitle.innerText = `${monthNames[month]} ${year}`;
+      
+      // Calculate days in month
+      const daysInMonth = new Date(year, month, 0).getDate();
+      calendarGrid.style.display = 'grid';
+      calendarGrid.innerHTML = '';
 
-    prevBtn.addEventListener('click', () => {
-      selectedIndex--;
-      rotateCarousel();
-    });
+      // Generate 1..31
+      for (let i = 1; i <= daysInMonth; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+        cell.innerText = i;
 
-    nextBtn.addEventListener('click', () => {
-      selectedIndex++;
-      rotateCarousel();
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        selectedIndex--;
-        rotateCarousel();
-      } else if (e.key === 'ArrowRight') {
-        selectedIndex++;
-        rotateCarousel();
+        // Check if there's an event on this specific day
+        const dateKey = `${year}-${month}-${i}`;
+        const daysEvents = eventsDB.filter(e => e.date === dateKey);
+
+        if (daysEvents.length > 0) {
+          cell.classList.add('has-event');
+          cell.onclick = () => showEvents(daysEvents, cell);
+        }
+
+        calendarGrid.appendChild(cell);
       }
-    });
+    }
+
+    // 4. Render Event Cards
+    function showEvents(events, clickedCell) {
+      // Highlight selection
+      document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
+      clickedCell.classList.add('selected');
+
+      eventDisplay.style.display = 'block';
+      eventDisplay.innerHTML = '';
+
+      events.forEach(ev => {
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        
+        let buttonHTML = `<a href="${ev.link}" target="_blank" class="reserve-btn">RESERVE SPOT</a>`;
+        if (ev.link === "#") {
+           buttonHTML = `<a href="#" class="reserve-btn" style="background:#333; cursor:default;">COMING SOON</a>`;
+        }
+
+        card.innerHTML = `
+          <img src="${ev.img}" class="event-img">
+          <h3 class="event-title">${ev.title}</h3>
+          <p class="event-info">📍 ${ev.venue}</p>
+          <p class="event-info">⏰ ${ev.time}</p>
+          ${buttonHTML}
+        `;
+        eventDisplay.appendChild(card);
+      });
+    }
+
+    // 5. Back Navigation
+    backBtn.onclick = () => {
+      dayView.style.display = 'none';
+      eventDisplay.style.display = 'none';
+      monthView.style.display = 'block';
+      backBtn.style.display = 'none';
+    };
+
+    // Initialize
+    renderMonths();
+
   </script>
 
 </body>
