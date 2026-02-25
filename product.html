@@ -21,11 +21,7 @@
 
   <style>
     /* --- RESET & BASE --- */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: #050505;
@@ -35,49 +31,21 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      overflow-x: hidden;
-      position: relative; /* Needed for absolute positioning context */
-    }
-
-    /* --- BACK BUTTON (FIXED) --- */
-    a.back-btn {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      color: #888;
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 14px;
-      letter-spacing: 2px;
-      border: 1px solid #333;
-      padding: 8px 20px;
-      transition: 0.3s;
-      
-      /* KEY FIX: High Z-Index to sit above everything */
-      z-index: 9999; 
-      cursor: pointer;
-      background: rgba(0,0,0,0.5); /* Slight background to ensure clickability */
-    }
-
-    a.back-btn:hover {
-      border-color: #fff;
-      color: #fff;
-      background: #000;
+      padding-bottom: 50px;
     }
 
     /* --- HEADER --- */
     .header {
-      padding: 40px 20px;
-      text-align: center;
       width: 100%;
-      z-index: 1;
-      margin-top: 10px; /* Space for the button on mobile */
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
     }
 
     h1 {
       font-family: 'Oswald', sans-serif;
-      font-size: 36px;
-      letter-spacing: 8px;
+      font-size: 32px;
+      letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 10px;
       text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
@@ -91,16 +59,115 @@
       font-weight: 600;
     }
 
+    a.back-home {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 12px;
+      color: #888;
+      text-decoration: none;
+      border: 1px solid #333;
+      padding: 8px 16px;
+      transition: 0.3s;
+    }
+
+    a.back-home:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+
+    /* --- NAVIGATION / BREADCRUMBS --- */
+    .nav-controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      min-height: 40px;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid #cc0000;
+      color: #cc0000;
+      padding: 10px 20px;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: none; /* Hidden by default */
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .nav-btn:hover {
+      background: #cc0000;
+      color: white;
+    }
+
+    /* --- SELECTION CONTAINERS --- */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    h2.step-title {
+      font-size: 14px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    /* --- CATEGORY GRID --- */
+    .category-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .category-card {
+      width: 200px;
+      height: 120px;
+      background: #111;
+      border: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card:hover {
+      border-color: #cc0000;
+      background: #1a0000;
+      transform: translateY(-5px);
+    }
+
+    .category-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      z-index: 2;
+    }
+
+    .item-count {
+      font-size: 11px;
+      color: #666;
+      margin-top: 5px;
+      z-index: 2;
+    }
+
     /* --- PRODUCT GRID --- */
-    .product-grid {
+    .product-list {
+      display: none; /* Hidden initially */
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      max-width: 1200px;
-      padding: 20px;
-      padding-bottom: 80px;
-      z-index: 2;
+      animation: fadeIn 0.5s ease;
     }
 
     .product-card {
@@ -119,16 +186,6 @@
       border-color: #333;
     }
 
-    /* Hover Glow Effect */
-    .product-card:hover::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      box-shadow: 0 0 20px rgba(204, 0, 0, 0.15); /* Red Glow */
-      pointer-events: none;
-      z-index: -1;
-    }
-
     .img-placeholder {
       width: 100%;
       height: 300px;
@@ -138,14 +195,13 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      position: relative;
     }
     
     .img-placeholder img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.7;
+      opacity: 0.8;
       transition: 0.4s;
       filter: grayscale(100%);
     }
@@ -191,77 +247,188 @@
       color: black;
     }
 
-    /* Variants */
-    .sold-out .buy-btn {
-      border-color: #333;
-      color: #555;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-    
-    .sold-out .img-placeholder::before {
-      content: 'SOLD OUT';
-      position: absolute;
-      color: white;
-      z-index: 5;
+    /* Empty state */
+    .empty-msg {
+      color: #666;
       font-family: 'Oswald', sans-serif;
-      font-size: 24px;
-      letter-spacing: 4px;
-      background: rgba(0,0,0,0.7);
-      padding: 5px 15px;
-      border: 1px solid white;
-      transform: rotate(-15deg);
+      letter-spacing: 2px;
+      margin-top: 50px;
     }
 
-    @media (max-width: 600px) {
-      /* Adjusted mobile position so it's not too close to the edge */
-      a.back-btn { 
-        top: 15px; 
-        left: 15px; 
-        padding: 8px 15px; 
-        font-size: 12px; 
-      }
-      .product-card { width: 100%; }
-      h1 { font-size: 28px; margin-top: 40px; }
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- Ensure this file exists: index.html -->
-  <a href="index.html" class="back-btn">← BACK</a>
-
   <div class="header">
     <h1>MERCH ARCHIVE</h1>
     <p class="subtitle">Limited Edition / Underground Wear</p>
+    <a href="index.html" class="back-home">← BACK TO HOME</a>
   </div>
 
-  <div class="product-grid">
+  <div class="container">
 
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+      <button id="backToCats" class="nav-btn">← Choose Category</button>
+    </div>
+
+    <!-- STEP 1: CATEGORY SELECTION -->
+    <div id="categoryView">
+      <h2 class="step-title">Select Category</h2>
+      <div class="category-grid" id="categoryGrid">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <!-- STEP 2: PRODUCT LIST -->
+    <div id="productView" style="display:none;">
+      <h2 class="step-title" id="selectedCatTitle">Category</h2>
+      <div class="product-list" id="productList">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // --- DATABASE ---
+    const productsDB = [
+      {
+        id: 1,
+        category: "Eyewear",
+        title: "Butterfly Oversized",
+        price: "EGP 355.00",
+        img: "https://i.ibb.co/b5sqcRkT/Change-the-cry-2k-202602201711.jpg",
+        link: "https://amzn.to/46gG9EM"
+      },
+      {
+        id: 2,
+        category: "Eyewear",
+        title: "Rotating Eyeballs",
+        price: "EGP 259.00",
+        img: "https://i.ibb.co/6R35H9KQ/Replace-rainbow-glasses-2k-202602220019.jpg",
+        link: "https://amzn.to/4b3wt36"
+      },
+      {
+        id: 3,
+        category: "Eyewear",
+        title: "Heart Shaped Love Effects",
+        price: "EGP 399.00",
+        img: "https://i.ibb.co/8LkQNK4X/Woman-with-pink-hair-glasses-cd09e58f68.jpg",
+        link: "https://amzn.to/4ceGlYV"
+      },
+      {
+        id: 4,
+        category: "Apparel",
+        title: "Psychedelic Printed Shirt",
+        price: "EGP 493.00",
+        img: "https://i.ibb.co/675nV9zW/Image-in-ta7telard-style-21d23a37d3.jpg",
+        link: "https://amzn.to/4r2kPdH"
+      },
+      {
+        id: 5,
+        category: "Accessories",
+        title: "Chinese Techno Fan",
+        price: "EGP 95.00",
+        img: "https://i.ibb.co/V0Wr7bjz/Image-in-ta7telard-style-e104f82de5.jpg",
+        link: "https://amzn.to/4leAghP"
+      }
+    ];
+
+    // Define categories
+    const categories = [
+      { name: "Eyewear", id: "Eyewear" },
+      { name: "Apparel", id: "Apparel" },
+      { name: "Accessories", id: "Accessories" }
+    ];
+
+    // --- LOGIC ---
     
+    const categoryView = document.getElementById('categoryView');
+    const categoryGrid = document.getElementById('categoryGrid');
+    const productView = document.getElementById('productView');
+    const productList = document.getElementById('productList');
+    const backBtn = document.getElementById('backToCats');
+    const selectedCatTitle = document.getElementById('selectedCatTitle');
 
-    <!-- Product 2 -->
-    <div class="product-card">
-      <div class="img-placeholder">
-        <img src="https://i.ibb.co/b5sqcRkT/Change-the-cry-2k-202602201711.jpg" alt="PolarX">
-      </div>
-      <h3 class="product-title">Butterfly Oversized Sunglasses</h3>
-      <p class="product-price">EGP 355.00</p>
-      <a href="https://amzn.to/46gG9EM" class="buy-btn" target="_blank">ORDER NOW</a>
-    </div>
+    // 1. Render Categories
+    function renderCategories() {
+      categoryGrid.innerHTML = '';
+      
+      categories.forEach(cat => {
+        // Count items in this category
+        const count = productsDB.filter(p => p.category === cat.id).length;
+        
+        const div = document.createElement('div');
+        div.className = 'category-card';
+        div.innerHTML = `
+          <span class="category-name">${cat.name}</span>
+          <span class="item-count">${count} Items</span>
+        `;
+        div.onclick = () => showProducts(cat.id);
+        categoryGrid.appendChild(div);
+      });
+    }
 
-    <!-- Product 2 -->
-    <div class="product-card">
-      <div class="img-placeholder">
-        <img src="https://i.ibb.co/6R35H9KQ/Replace-rainbow-glasses-2k-202602220019.jpg" alt="PolarX">
-      </div>
-      <h3 class="product-title">Rotating Eyeballs Sunglasses</h3>
-      <p class="product-price">EGP 259.00</p>
-      <a href="https://amzn.to/4b3wt36" class="buy-btn" target="_blank">ORDER NOW</a>
-    </div>
+    // 2. Render Products
+    function showProducts(catId) {
+      // Switch Views
+      categoryView.style.display = 'none';
+      productView.style.display = 'block';
+      backBtn.style.display = 'block';
+      
+      selectedCatTitle.innerText = catId.toUpperCase();
+      productList.style.display = 'flex'; // Ensure flex layout
+      productList.innerHTML = '';
 
-  </div>
+      // Filter products
+      const filtered = productsDB.filter(p => p.category === catId);
+
+      if (filtered.length === 0) {
+        productList.innerHTML = '<div class="empty-msg">NO DROPS CURRENTLY AVAILABLE</div>';
+        return;
+      }
+
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        
+        let btnHTML = `<a href="${p.link}" target="_blank" class="buy-btn">ORDER NOW</a>`;
+        // Handle "Coming Soon" or empty links
+        if (p.link === "#" || p.link === "") {
+          btnHTML = `<a href="#" class="buy-btn" style="border-color:#333; color:#555; pointer-events:none;">COMING SOON</a>`;
+        }
+
+        card.innerHTML = `
+          <div class="img-placeholder">
+            <img src="${p.img}" alt="${p.title}">
+          </div>
+          <h3 class="product-title">${p.title}</h3>
+          <p class="product-price">${p.price}</p>
+          ${btnHTML}
+        `;
+        productList.appendChild(card);
+      });
+    }
+
+    // 3. Back Navigation
+    backBtn.onclick = () => {
+      productView.style.display = 'none';
+      categoryView.style.display = 'block';
+      backBtn.style.display = 'none';
+    };
+
+    // Initialize
+    renderCategories();
+
+  </script>
 
 </body>
 </html>
