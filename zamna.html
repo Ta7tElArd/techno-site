@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZAMNA SURVIVAL KIT | TA7TELARD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGH1LLK5SH"></script>
+  <script>
+    window.dataLayer = window.dataLayer ||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SGH1LLK5SH');
+  </script>
+
+  <style>
+    /* --- RESET & BASE --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #050505;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 50px;
+      overflow-x: hidden;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      width: 100%;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 36px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(204, 0, 0, 0.4);
+    }
+
+    p.subtitle {
+      color: #cc0000;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    a.back-home {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 12px;
+      color: #888;
+      text-decoration: none;
+      border: 1px solid #333;
+      padding: 8px 20px;
+      transition: 0.3s;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    a.back-home:hover {
+      border-color: #cc0000;
+      color: #cc0000;
+      background: #111;
+    }
+
+    /* --- CONTAINER --- */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* --- PRODUCT GRID --- */
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .product-card {
+      width: 320px;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      border-color: #333;
+    }
+
+    /* Hover Glow Effect */
+    .product-card:hover::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      box-shadow: 0 0 20px rgba(204, 0, 0, 0.15); /* Red Glow */
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      height: 300px;
+      background: #fff; 
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+    }
+    
+    .img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; 
+      opacity: 0.8;
+      transition: 0.4s;
+      filter: grayscale(100%);
+    }
+
+    .product-card:hover .img-placeholder img {
+      opacity: 1;
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .product-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      color: #fff;
+      line-height: 1.3;
+      min-height: 42px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-price {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+      font-family: monospace;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px 0;
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .buy-btn:hover {
+      background: #cc0000;
+      border-color: #cc0000;
+      color: white;
+    }
+
+    /* --- INFO OVERLAY (THE "WHY") --- */
+    .info-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #cc0000;
+      border: 1px solid #cc0000;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      padding: 4px 8px;
+      cursor: pointer;
+      z-index: 5;
+      transition: 0.3s;
+    }
+
+    .info-btn:hover {
+      background: #cc0000;
+      color: #fff;
+    }
+
+    .info-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.96);
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.4s ease;
+      z-index: 10;
+      border: 1px solid #cc0000;
+    }
+
+    .info-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .info-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      color: #888;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .info-close:hover {
+      color: #cc0000;
+    }
+
+    .info-text {
+      direction: rtl;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(204, 0, 0, 0.5);
+      font-weight: 400;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 28px; }
+      .product-card { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>ZAMNA SURVIVAL KIT</h1>
+    <p class="subtitle">Festival Essentials for the Underground</p>
+    <a href="index.html" class="back-home">← BACK TO MAIN</a>
+  </div>
+
+  <div class="container">
+    <div class="product-list" id="productList">
+      <!-- Products will be generated here by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    // --- DATABASE ---
+    const zamnaKitDB =[
+      {
+        id: 1,
+        title: "Hydration Pack with Water Bladder",
+        price: "EGP 500.00",
+        img: "https://m.media-amazon.com/images/I/7145g8bNkzL._AC_SL1500_.jpg",
+        link: "https://amzn.to/46DCxwS",
+        why_ar: "الزحمة والرقص لساعات هيسحبوا كل نقطة ماية في جسمك. الشنطة دي هتبقيك واقف على رجلك من غير ما تضيع وقتك في طوابير البار."
+      },
+      {
+        id: 2,
+        title: "Electrolyte Powder Drink Mix",
+        price: "EGP 160.00",
+        img: "https://m.media-amazon.com/images/I/712uyKKajGL._AC_SL1500_.jpg",
+        link: "https://amzn.to/4aXdplV",
+        why_ar: "عرق كتير معناه هبوط مفاجئ. البودرة دي هترجعلك الأملاح وطاقتك في ثواني وتمنع الشد العضلي عشان تكمل الفايب للآخر."
+      },
+      {
+        id: 3,
+        title: "Portable Power Bank 20000mAh",
+        price: "EGP 699.00",
+        img: "https://m.media-amazon.com/images/I/71TmR3wIN5L._AC_SL1500_.jpg",
+        link: "https://amzn.to/4cjk8cl",
+        why_ar: "موبايلك لو فصل، إنت اتعزلت عن أصحابك وسط آلاف الناس المجهولة. الباور بانك ده ضمانك إنك تتجمع بيهم وتوثق اللحظة."
+      },
+      {
+        id: 4,
+        title: "High Fidelity Musician Earplugs",
+        price: "EGP 2,800.00",
+        img: "https://m.media-amazon.com/images/I/61utEYj9NnL._AC_SL1500_.jpg",
+        link: "https://amzn.to/4r9vbsm",
+        why_ar: "البيز هيضرب في عضمك، بس طبلة ودنك ملهاش قطع غيار. السدادات دي بتفلتر الدوشة وبتسيبلك التراك بنضافة من غير ما تفقد سمعك."
+      },
+      {
+        id: 5,
+        title: "Safe Sunscreen SPF 50",
+        price: "EGP 295.00",
+        img: "https://m.media-amazon.com/images/I/61oNC92LUDL._AC_SL1500_.jpg",
+        link: "https://amzn.to/4r35LfO",
+        why_ar: "زمنة بتبدأ من العصر وشمس مصر مابترحمش. لو مش عايز تقلب بقطعة فحم وتفرهد قبل نص الليل، ده أساسي في جيبك."
+      },
+      {
+        id: 6,
+        title: "Mini First Aid Kit Travel Size",
+        price: "EGP 900.00",
+        img: "https://m.media-amazon.com/images/I/61qV+PUvBnL._AC_SL1024_.jpg",
+        link: "https://amzn.to/405H9rO",
+        why_ar: "إصابات الزحمة، الإزاز المكسور، والرقص العنيف بتحصل دايماً. خليك جاهز لأي طوارئ تقطع عليك المود إنت أو اللي معاك."
+      }
+    ];
+
+    // --- LOGIC ---
+    const productList = document.getElementById('productList');
+
+    function renderKit() {
+      zamnaKitDB.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        
+        let btnHTML = `<a href="${p.link}" target="_blank" class="buy-btn">ORDER NOW</a>`;
+        if (p.link === "#" || p.link === "") {
+          btnHTML = `<a href="#" class="buy-btn" style="border-color:#333; color:#777; pointer-events:none;">COMING SOON</a>`;
+        }
+
+        card.innerHTML = `
+          <div class="info-btn" onclick="toggleInfo(${p.id})">[ WHY ]</div>
+          
+          <div class="info-overlay" id="info-${p.id}">
+            <div class="info-close" onclick="toggleInfo(${p.id})">&times;</div>
+            <p class="info-text">${p.why_ar}</p>
+          </div>
+
+          <div class="img-placeholder">
+            <img src="${p.img}" alt="${p.title}">
+          </div>
+          <h3 class="product-title">${p.title}</h3>
+          <p class="product-price">${p.price}</p>
+          ${btnHTML}
+        `;
+        productList.appendChild(card);
+      });
+    }
+
+    // Toggle Overlay Function
+    window.toggleInfo = function(id) {
+      const overlay = document.getElementById(`info-${id}`);
+      if (overlay.classList.contains('active')) {
+        overlay.classList.remove('active');
+      } else {
+        // Close others first (optional, but good for UX)
+        document.querySelectorAll('.info-overlay').forEach(el => el.classList.remove('active'));
+        overlay.classList.add('active');
+      }
+    };
+
+    // Initialize the page rendering
+    renderKit();
+
+  </script>
+
+</body>
+</html>
