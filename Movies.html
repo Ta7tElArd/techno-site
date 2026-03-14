@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOVIES | TA7TELARD</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- RESET & BASE --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000;
+      background: radial-gradient(circle at 50% 30%, #1a0000 0%, #000000 70%);
+      color: #ededed;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow-x: hidden;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      z-index: 2;
+    }
+
+    /* --- LOGO --- */
+    .logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 15px rgba(200, 0, 0, 0.3));
+    }
+
+    /* --- TYPOGRAPHY --- */
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 32px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      line-height: 1.2;
+      color: white;
+    }
+
+    p.subtitle {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #cc0000;
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+
+    /* --- MOVIE BUTTONS --- */
+    .movie-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 50px;
+      align-items: center;
+    }
+
+    a.movie-btn {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      padding: 18px 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: white;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    a.movie-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: #990000;
+      z-index: -1;
+      transition: width 0.3s ease;
+    }
+
+    a.movie-btn:hover::before {
+      width: 100%;
+    }
+
+    a.movie-btn:hover {
+      border-color: #990000;
+      box-shadow: 0 0 20px rgba(153, 0, 0, 0.5);
+      transform: translateY(-3px);
+    }
+
+    /* --- BACK LINK --- */
+    a.back-link {
+      color: #666;
+      font-size: 12px;
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    a.back-link:hover {
+      color: #cc0000;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 24px; }
+      a.movie-btn { font-size: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    
+    <!-- Logo -->
+    <img src="logo.png" alt="TA7TELARD" class="logo" />
+
+    <!-- Titles -->
+    <h1>Movies every techno raver must watch</h1>
+    <p class="subtitle">Essential Cinema Archive</p>
+
+    <!-- Movie Links -->
+    <div class="movie-grid">
+      
+      <a href="https://streamex.sh/watch/movie/30508?server=streamx" class="movie-btn" target="_blank">
+        Berlin Calling
+      </a>
+
+      <a href="https://streamex.sh/watch/movie/11129?server=streamx" class="movie-btn" target="_blank">
+        Human Traffic
+      </a>
+
+      <a href="https://streamex.sh/watch/movie/12109?server=streamx" class="movie-btn" target="_blank">
+        It’s All Gone Pete Tong
+      </a>
+
+      <a href="https://streamex.sh/watch/movie/461118?server=videasy" class="movie-btn" target="_blank">
+        What We Started
+      </a>
+
+      <a href="https://streamex.sh/watch/movie/301351?server=streamx" class="movie-btn" target="_blank">
+        We Are Your Friends
+      </a>
+
+    </div>
+
+    <!-- Return Link -->
+    <a href="index.html" class="back-link">← Back to Main</a>
+
+  </div>
+
+</body>
+</html>
