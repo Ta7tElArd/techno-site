@@ -1,0 +1,961 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;--s1:#111;--s2:#161616;--s3:#1c1c1c;
+  --b1:#222;--b2:#2e2e2e;--b3:#3a3a3a;
+  --gold:#c9a84c;--goldl:#e8c96a;--goldd:#8a6a1e;
+  --text:#ccc9be;--muted:#666;--dim:#444;
+  --white:#f0ece0;--red:#8b2222;--teal:#1a4a42;--blue:#1a2a4a;
+  --success:#1a4a1a;--warn:#3a2a00;
+}
+body,#app{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;direction:rtl;min-height:100vh;font-size:15px}
+.pg{display:none}
+.pg.on{display:flex;flex-direction:column;min-height:100vh;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── COVER ─── */
+#cov{background:var(--bg);justify-content:center;align-items:center;padding:2.5rem 1.5rem;text-align:center;gap:1.2rem;position:relative;overflow:hidden;min-height:100vh}
+.cn{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -5%,#1a1208 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 5% 95%,#0b1a14 0%,transparent 50%),radial-gradient(ellipse 50% 50% at 95% 60%,#100a1a 0%,transparent 50%);z-index:0}
+.cg{position:absolute;inset:0;z-index:0;opacity:.04;background-image:linear-gradient(var(--gold) 1px,transparent 1px),linear-gradient(90deg,var(--gold) 1px,transparent 1px);background-size:36px 36px}
+.cw{position:absolute;bottom:0;left:0;right:0;height:90px;display:flex;align-items:flex-end;justify-content:center;gap:2px;opacity:.1;z-index:0}
+.wb{width:4px;background:var(--gold);border-radius:3px 3px 0 0;animation:wp 2s ease-in-out infinite}
+@keyframes wp{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.15)}}
+.cc{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:420px}
+.ctag{font-size:9px;letter-spacing:4px;color:var(--gold);border:.5px solid var(--gold);padding:5px 14px;border-radius:2px}
+.clogo{font-size:clamp(2.8rem,9vw,5rem);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-2px}
+.clogo span{color:var(--gold)}
+.csub{font-size:.9rem;color:#777;font-weight:300;line-height:1.9;max-width:330px}
+.cline{width:50px;height:.5px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.cprice{font-size:.75rem;color:var(--gold);letter-spacing:2px;font-family:monospace;opacity:.8}
+.cbio{font-size:.7rem;color:var(--dim);letter-spacing:3px;font-family:monospace}
+.cbtn{background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:'Cairo',sans-serif;font-size:.85rem;padding:11px 32px;cursor:pointer;letter-spacing:2px;border-radius:2px;transition:all .25s;margin-top:.5rem}
+.cbtn:hover{background:var(--gold);color:#000}
+.cstats{display:flex;gap:1.5rem;margin-top:.5rem}
+.cs{text-align:center}
+.cs-n{font-size:1.2rem;font-weight:700;color:var(--gold)}
+.cs-l{font-size:.68rem;color:var(--muted);letter-spacing:1px}
+
+/* ─── TOPBAR ─── */
+.tb{background:var(--s2);border-bottom:.5px solid var(--b1);padding:.65rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.tb-br{font-size:9px;letter-spacing:3px;color:var(--gold);font-family:monospace}
+.tb-ti{font-size:.75rem;color:var(--muted)}
+.tbk{background:transparent;border:.5px solid var(--b1);color:var(--muted);font-family:'Cairo',sans-serif;font-size:.72rem;padding:5px 11px;cursor:pointer;border-radius:2px;transition:all .2s}
+.tbk:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ─── CHAPTERS LIST ─── */
+#chp{background:var(--bg)}
+.chg{padding:1.25rem;display:flex;flex-direction:column;gap:8px}
+.chh{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.25rem .7rem;border-bottom:.5px solid var(--b1)}
+.chh h2{font-size:.95rem;font-weight:600;color:var(--white);letter-spacing:1px}
+.cc2{background:var(--s2);border:.5px solid var(--b1);border-radius:3px;padding:.85rem 1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;position:relative;overflow:hidden}
+.cc2::after{content:'';position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--gold);opacity:0;transition:opacity .2s}
+.cc2:hover{background:#1a1a1a;border-color:var(--b2)}
+.cc2:hover::after{opacity:1}
+.ci{text-align:right}
+.cn2{font-size:8px;color:var(--gold);letter-spacing:3px;margin-bottom:2px;font-family:monospace}
+.ct{font-size:.9rem;font-weight:600;color:var(--white);line-height:1.3}
+.cd{font-size:.7rem;color:var(--muted);margin-top:2px}
+.cbadge{font-size:.65rem;padding:2px 7px;border-radius:2px;border:.5px solid;margin-top:4px;display:inline-block}
+.act{color:#4a9;border-color:#4a9}
+.sci{color:#79f;border-color:#79f}
+.fix{color:#f94;border-color:#f94}
+.car{font-size:.95rem;color:var(--muted)}
+.cc2:hover .car{color:var(--gold)}
+
+/* ─── READER ─── */
+#rdr{background:var(--s1)}
+.rb{padding:1.75rem 1.5rem 2rem;max-width:700px;margin:0 auto;width:100%;flex:1}
+
+/* Typography */
+.rh-n{font-size:8px;color:var(--gold);letter-spacing:4px;margin-bottom:.5rem;font-family:monospace}
+.rh-t{font-size:clamp(1.5rem,5vw,2.5rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:.6rem}
+.rh-i{font-size:.9rem;color:var(--muted);line-height:1.95;font-weight:300;margin-bottom:.5rem}
+.rh-sep{height:.5px;background:var(--b1);margin:1.4rem 0}
+.p{font-size:.9rem;line-height:2.05;color:var(--text);margin-bottom:1.2rem}
+.hl{color:var(--goldl);font-weight:600}
+.hl2{color:#8af;font-weight:600}
+.sec{font-size:.85rem;font-weight:700;color:var(--gold);margin:1.8rem 0 .6rem;display:flex;align-items:center;gap:8px;letter-spacing:.5px}
+.sec::after{content:'';flex:1;height:.5px;background:var(--b1)}
+
+/* Pull quote */
+.pq{border-right:3px solid var(--gold);padding:.8rem 1rem;margin:1.5rem 0;background:#130f08;border-radius:0 3px 3px 0}
+.pq p{font-size:.95rem;color:var(--white);line-height:1.85;font-style:italic}
+
+/* Science box */
+.sci-box{background:#0d1020;border:.5px solid #2a3060;border-radius:4px;padding:1.1rem 1.25rem;margin:1.3rem 0}
+.sci-lbl{font-size:8px;color:#79f;letter-spacing:3px;margin-bottom:.5rem;font-family:monospace}
+.sci-box p{font-size:.85rem;color:#aab;line-height:1.9}
+.sci-box ul{margin:.5rem 0 0 0;padding-right:1rem}
+.sci-box ul li{font-size:.82rem;color:#aab;line-height:1.9;list-style:none;padding-right:1.2rem;position:relative}
+.sci-box ul li::before{content:'›';position:absolute;right:0;color:#79f;font-weight:700}
+
+/* Warning box */
+.warn-box{background:#1a0e00;border:.5px solid #6a3a00;border-radius:4px;padding:1rem 1.25rem;margin:1.3rem 0}
+.warn-lbl{font-size:8px;color:#f94;letter-spacing:3px;margin-bottom:.4rem;font-family:monospace}
+.warn-box p{font-size:.85rem;color:#cc9;line-height:1.85}
+
+/* Success box */
+.ok-box{background:#001a0a;border:.5px solid #1a6a3a;border-radius:4px;padding:1rem 1.25rem;margin:1.3rem 0}
+.ok-lbl{font-size:8px;color:#4a9;letter-spacing:3px;margin-bottom:.4rem;font-family:monospace}
+.ok-box p{font-size:.85rem;color:#9ca;line-height:1.85}
+
+/* Stat cards */
+.stats-row{display:flex;gap:8px;margin:1.2rem 0;flex-wrap:wrap}
+.stat{background:var(--s3);border:.5px solid var(--b1);border-radius:3px;padding:.7rem .9rem;flex:1;min-width:100px;text-align:center}
+.stat-n{font-size:1.4rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-l{font-size:.65rem;color:var(--muted);margin-top:3px}
+
+/* List */
+.li{margin:.4rem 0 1.2rem;padding-right:1rem}
+.li li{font-size:.88rem;color:var(--text);line-height:2;list-style:none;padding-right:1.3rem;position:relative}
+.li li::before{content:'—';position:absolute;right:0;color:var(--gold);font-weight:700}
+
+/* Tags */
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:1rem 0}
+.tag{background:var(--s3);border:.5px solid var(--b1);color:var(--muted);font-size:.68rem;padding:3px 8px;border-radius:2px}
+
+/* ─── INTERACTIVE ACTIVITIES ─── */
+.act-box{background:var(--s3);border:.5px solid var(--b2);border-radius:6px;padding:1.25rem;margin:1.5rem 0}
+.act-hdr{display:flex;align-items:center;gap:8px;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:.5px solid var(--b1)}
+.act-icon{font-size:1.2rem}
+.act-title{font-size:.85rem;font-weight:700;color:var(--white)}
+.act-sub{font-size:.7rem;color:var(--muted);margin-top:1px}
+
+/* Slider activity */
+.sl-row{margin:.6rem 0;display:flex;flex-direction:column;gap:4px}
+.sl-label{font-size:.78rem;color:var(--text);display:flex;justify-content:space-between}
+.sl-label span{color:var(--gold);font-weight:600;font-family:monospace}
+input[type=range]{width:100%;accent-color:var(--gold);height:4px;cursor:pointer}
+.sl-hints{display:flex;justify-content:space-between;font-size:.65rem;color:var(--dim);margin-top:2px}
+
+/* Score display */
+.score-disp{background:var(--s1);border:.5px solid var(--b1);border-radius:3px;padding:.8rem 1rem;margin:.8rem 0;text-align:center}
+.score-num{font-size:2rem;font-weight:900;color:var(--gold);font-family:monospace}
+.score-label{font-size:.72rem;color:var(--muted);margin-top:3px}
+.score-bar{height:6px;background:var(--b1);border-radius:3px;margin:.6rem 0;overflow:hidden}
+.score-fill{height:100%;background:linear-gradient(90deg,var(--goldd),var(--gold),var(--goldl));border-radius:3px;transition:width .5s ease}
+.score-result{font-size:.82rem;color:var(--text);line-height:1.7;margin-top:.5rem;padding:.6rem .8rem;background:var(--s2);border-radius:3px;border-right:2px solid var(--gold)}
+
+/* Checklist */
+.chk-list{display:flex;flex-direction:column;gap:6px;margin:.5rem 0}
+.chk-item{display:flex;align-items:flex-start;gap:10px;padding:.6rem .8rem;background:var(--s2);border:.5px solid var(--b1);border-radius:3px;cursor:pointer;transition:all .2s}
+.chk-item.done{border-color:#1a6a3a;background:#001a0a}
+.chk-box{width:18px;height:18px;border:.5px solid var(--b2);border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;transition:all .2s;margin-top:1px}
+.chk-item.done .chk-box{background:var(--gold);border-color:var(--gold);color:#000}
+.chk-text{font-size:.82rem;color:var(--text);line-height:1.6}
+.chk-item.done .chk-text{color:var(--muted);text-decoration:line-through;text-decoration-color:#444}
+.chk-prog{font-size:.72rem;color:var(--muted);margin-top:.4rem;font-family:monospace}
+
+/* Timer */
+.timer-box{display:flex;flex-direction:column;align-items:center;gap:.8rem;padding:1rem}
+.timer-disp{font-size:3rem;font-weight:900;color:var(--gold);font-family:monospace;letter-spacing:4px}
+.timer-btns{display:flex;gap:8px}
+.tbtn{background:transparent;border:.5px solid var(--b2);color:var(--text);font-family:'Cairo',sans-serif;font-size:.78rem;padding:7px 16px;cursor:pointer;border-radius:2px;transition:all .2s}
+.tbtn:hover{border-color:var(--gold);color:var(--gold)}
+.tbtn.active{background:var(--gold);color:#000;border-color:var(--gold)}
+
+/* Journal */
+.journal-area{width:100%;background:var(--s1);border:.5px solid var(--b2);border-radius:3px;padding:.8rem;color:var(--text);font-family:'Cairo',sans-serif;font-size:.82rem;line-height:1.8;resize:vertical;min-height:90px;direction:rtl}
+.journal-area:focus{outline:none;border-color:var(--gold)}
+.journal-area::placeholder{color:var(--dim)}
+.save-btn{background:transparent;border:.5px solid var(--gold);color:var(--gold);font-family:'Cairo',sans-serif;font-size:.75rem;padding:6px 14px;cursor:pointer;border-radius:2px;transition:all .2s;margin-top:6px}
+.save-btn:hover{background:var(--gold);color:#000}
+.saved-note{font-size:.72rem;color:#4a9;margin-top:4px;display:none}
+
+/* Progress tracker */
+.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:.6rem 0}
+.day-cell{aspect-ratio:1;background:var(--s2);border:.5px solid var(--b1);border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--muted);transition:all .2s;flex-direction:column;gap:1px}
+.day-cell:hover{border-color:var(--b3)}
+.day-cell.done{background:#001a08;border-color:#1a6a3a;color:#4a9}
+.day-cell.today{border-color:var(--gold)}
+.day-label{font-size:.55rem;color:var(--muted);margin-bottom:2px}
+
+/* BPM selector */
+.bpm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.6rem 0}
+.bpm-card{background:var(--s2);border:.5px solid var(--b1);border-radius:3px;padding:.7rem .5rem;cursor:pointer;text-align:center;transition:all .2s}
+.bpm-card:hover,.bpm-card.sel{border-color:var(--gold);background:#1a1508}
+.bpm-card.sel .bpm-n{color:var(--gold)}
+.bpm-n{font-size:1.1rem;font-weight:700;color:var(--white);font-family:monospace}
+.bpm-g{font-size:.65rem;color:var(--muted);margin-top:2px}
+.bpm-result{font-size:.8rem;color:var(--text);line-height:1.7;margin-top:.6rem;padding:.6rem .8rem;background:var(--s1);border-right:2px solid var(--gold);border-radius:0 3px 3px 0}
+
+/* Quiz */
+.quiz-q{font-size:.88rem;color:var(--white);font-weight:600;margin-bottom:.7rem;line-height:1.6}
+.quiz-opts{display:flex;flex-direction:column;gap:6px}
+.quiz-opt{background:var(--s2);border:.5px solid var(--b1);border-radius:3px;padding:.65rem .9rem;cursor:pointer;font-size:.82rem;color:var(--text);transition:all .2s;text-align:right}
+.quiz-opt:hover{border-color:var(--b3)}
+.quiz-opt.correct{border-color:#1a9a5a;background:#001a0a;color:#4a9}
+.quiz-opt.wrong{border-color:#8b2222;background:#1a0808;color:#c66}
+.quiz-fb{font-size:.8rem;line-height:1.7;margin-top:.6rem;padding:.6rem .8rem;border-radius:3px;display:none}
+.quiz-fb.show{display:block}
+.quiz-fb.ok{background:#001a0a;border:.5px solid #1a6a3a;color:#8c8}
+.quiz-fb.no{background:#1a0808;border:.5px solid #6a2222;color:#c88}
+
+/* Nav */
+.bnav{background:var(--s2);border-top:.5px solid var(--b1);padding:.9rem 1.5rem;display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.bnav button{background:transparent;border:.5px solid var(--b1);color:var(--muted);font-family:'Cairo',sans-serif;font-size:.75rem;padding:7px 15px;cursor:pointer;border-radius:2px;transition:all .2s}
+.bnav button:hover{border-color:var(--gold);color:var(--gold)}
+.bnav button:disabled{opacity:.2;cursor:default}
+.prog{font-size:8px;color:var(--muted);letter-spacing:2px;font-family:monospace}
+.prog-bar{height:2px;background:var(--b1);border-radius:1px;margin-top:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--gold);border-radius:1px;transition:width .4s}
+</style>
+
+<div id="app">
+
+<!-- ══ COVER ══ -->
+<div id="cov" class="pg on">
+  <div class="cn"></div><div class="cg"></div>
+  <div class="cw" id="cwaves"></div>
+  <div class="cc">
+    <div class="ctag">@TA7TELARD · تحت الأرض · EGYPT'S UNDERGROUND</div>
+    <div class="clogo">حالة<br><span>التدفق</span></div>
+    <div class="cline"></div>
+    <div class="csub">الدليل العلمي الكامل لدخول المنطقة — ولما تعيش فيها</div>
+    <div class="cstats">
+      <div class="cs"><div class="cs-n">7</div><div class="cs-l">فصول</div></div>
+      <div class="cs"><div class="cs-n">20+</div><div class="cs-l">نشاط تفاعلي</div></div>
+      <div class="cs"><div class="cs-n">40+</div><div class="cs-l">دراسة علمية</div></div>
+    </div>
+    <div class="cbio">NEWS · CULTURE · EVENTS · 1M+ VIEWS ⚡</div>
+    <button class="cbtn" onclick="go('chp')">ابدأ القراءة ↓</button>
+  </div>
+</div>
+
+<!-- ══ CHAPTERS ══ -->
+<div id="chp" class="pg">
+  <div class="tb">
+    <div class="tbk" onclick="go('cov')">← رجوع</div>
+    <div class="tb-ti">كتاب حالة التدفق</div>
+    <div class="tb-br">TA7TELARD</div>
+  </div>
+  <div class="chh"><h2>الفهرس</h2></div>
+  <div class="chg" id="chGrid"></div>
+</div>
+
+<!-- ══ READER ══ -->
+<div id="rdr" class="pg">
+  <div class="tb">
+    <div class="tbk" onclick="go('chp')">← الفهرس</div>
+    <div class="tb-ti" id="rTitle"></div>
+    <div class="tb-br">TA7TELARD</div>
+  </div>
+  <div class="rb" id="rBody"></div>
+  <div class="bnav">
+    <button id="prevB" onclick="nav(-1)">→ السابق</button>
+    <div>
+      <div class="prog" id="progT"></div>
+      <div class="prog-bar"><div class="prog-fill" id="progF"></div></div>
+    </div>
+    <button id="nextB" onclick="nav(1)">التالي ←</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+const CHS=[
+/* ────────── 00 ────────── */
+{num:"00",title:"ليه التكنو بيكسّر مخك (بالعلم)",desc:"الأساس الفلسفي والعلمي",badges:['sci'],
+html:`
+<div class="rh-n">الفصل 00 · FOUNDATION</div>
+<div class="rh-t">ليه التكنو بيكسّر مخك</div>
+<div class="rh-i">مش رأي — ده علم مقيّس في معامل.</div>
+<div class="rh-sep"></div>
+
+<div class="sci-box">
+<div class="sci-lbl">دراسة علمية · CSIKSZENTMIHALYI 1990</div>
+<p>عالم النفس المجري <span class="hl2">ميهالي تشيكسنتميهاي</span> قضى 25 سنة بيسأل 8,000 شخص عن أوقات إحساسهم بأفضل حالاتهم. الإجابة دايماً كانت واحدة: مش في وقت الراحة — في وقت الانغماس الكامل. سمّى الحالة دي <strong>Flow State</strong>.</p>
+</div>
+
+<p class="p">حالة التدفق مش شعور عاطفي — هي <span class="hl">حالة عصبية قابلة للقياس</span>. لما بتدخل فيها، مخك بيتغير فيزيائياً. الموجات الكهربية بتتغير، الكيمياء بتتغير، وحتى إحساسك بالوقت بينكسر.</p>
+
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">5</div><div class="stat-l">نيوروكيميكالز بتتحرر</div></div>
+  <div class="stat"><div class="stat-n">500%</div><div class="stat-l">زيادة الإنتاجية (McKinsey)</div></div>
+  <div class="stat"><div class="stat-n">7x</div><div class="stat-l">أسرع في حل المشاكل</div></div>
+</div>
+
+<div class="sci-box">
+<div class="sci-lbl">الـ 5 نيوروكيميكالز · THE COCKTAIL</div>
+<ul>
+  <li><span class="hl2">دوبامين</span> — التركيز والمكافأة، بيوصّل لمراكز الدخول والخروج من التدفق</li>
+  <li><span class="hl2">نورإيبينيفرين</span> — يرفع التيقظ وسرعة المعالجة</li>
+  <li><span class="hl2">أنانداميد</span> — نفس مستقبلات الـ THC، بيرفع التفكير الجانبي</li>
+  <li><span class="hl2">سيروتونين</span> — إحساس الرضا والسلام اللي بتحسه بعد الحفلة</li>
+  <li><span class="hl2">إندورفين</span> — بتمنع الإحساس بالإجهاد الجسدي</li>
+</ul>
+</div>
+
+<p class="p">الموسيقى الإلكترونية — تحديداً الأنواع ذات الـ BPM المتوسط والمرتفع مع البيس العميق — <span class="hl">تُحرّض أكبر عدد من هذه المواد الكيميائية في نفس الوقت</span>، أكثر من أي نشاط تاني اتقيس في المعامل ماعدا الجري الشديد والتأمل العميق.</p>
+
+<div class="pq"><p>"التدفق مش بيحصل عندك — بيحصل فيك. مخك بيُعيد برمجة نفسه كل مرة."</p></div>
+
+<div class="sec">نشاط 01: اختبار مستوى التدفق الحالي</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🧠</span><div><div class="act-title">قيّم مستواك الحالي</div><div class="act-sub">حرّك السلايدرات بصدق — مفيش إجابة غلط</div></div></div>
+
+  <div class="sl-row">
+    <div class="sl-label">قدرة التركيز (ساعات) <span id="fc-v">3</span></div>
+    <input type="range" min="0" max="10" value="3" oninput="updateScore('fc',this.value)" id="fc">
+    <div class="sl-hints"><span>بصعوبة</span><span>كالمحترفين</span></div>
+  </div>
+
+  <div class="sl-row">
+    <div class="sl-label">إحساس بالزمن أثناء الموسيقى <span id="ft-v">3</span></div>
+    <input type="range" min="0" max="10" value="3" oninput="updateScore('ft',this.value)" id="ft">
+    <div class="sl-hints"><span>الوقت بيتقل</span><span>بيختفي</span></div>
+  </div>
+
+  <div class="sl-row">
+    <div class="sl-label">القدرة على "الانسحاب" من التفكير <span id="fw-v">3</span></div>
+    <input type="range" min="0" max="10" value="3" oninput="updateScore('fw',this.value)" id="fw">
+    <div class="sl-hints"><span>صعب جداً</span><span>تلقائي</span></div>
+  </div>
+
+  <div class="sl-row">
+    <div class="sl-label">الإحساس بجسمك أثناء الموسيقى <span id="fb-v">3</span></div>
+    <input type="range" min="0" max="10" value="3" oninput="updateScore('fb',this.value)" id="fb">
+    <div class="sl-hints"><span>منفصل</span><span>متوحّد تماماً</span></div>
+  </div>
+
+  <div class="score-disp">
+    <div class="score-num" id="totalScore">30</div>
+    <div class="score-label">مستواك الحالي / 100</div>
+    <div class="score-bar"><div class="score-fill" id="scoreFill" style="width:30%"></div></div>
+    <div class="score-result" id="scoreResult">حرّك السلايدرات فوق لمعرفة مستواك</div>
+  </div>
+</div>
+
+<div class="tags"><span class="tag">علم الأعصاب</span><span class="tag">نيوروكيميكالز</span><span class="tag">قياس</span><span class="tag">flow state</span></div>
+`},
+
+/* ────────── 01 ────────── */
+{num:"01",title:"مخك على الريدم — العلم الكامل",desc:"موجات الدماغ، BPM، والفيزياء الصوتية",badges:['sci'],
+html:`
+<div class="rh-n">الفصل 01 · NEUROSCIENCE</div>
+<div class="rh-t">مخك على الريدم</div>
+<div class="rh-i">كل إيقاع بيعمل حاجة مختلفة لمخك — اعرف الفرق واختار صح.</div>
+<div class="rh-sep"></div>
+
+<div class="sci-box">
+<div class="sci-lbl">موجات الدماغ · BRAINWAVES</div>
+<ul>
+  <li><span class="hl2">جاما (30–100 Hz)</span> — قمة التركيز، اللحظات الإبداعية الفلاشية</li>
+  <li><span class="hl2">بيتا (13–30 Hz)</span> — اليقظة، التحليل، القلق — الحالة الافتراضية</li>
+  <li><span class="hl2">ألفا (8–13 Hz)</span> — الاسترخاء اليقظ، بداية التدفق الخفيف</li>
+  <li><span class="hl2">ثيتا (4–8 Hz)</span> — التدفق العميق، الإبداع، الـ Hypnagogic State</li>
+  <li><span class="hl2">دلتا (0.5–4 Hz)</span> — النوم العميق، التعافي</li>
+</ul>
+</div>
+
+<p class="p">التكنو والهاوس بيدفع مخك من <span class="hl">بيتا → ألفا → ثيتا</span> تدريجياً. البيلدأب بيرفع المخ، والـ Groove المتكرر بيهبّطه للثيتا. المهندسون الصوتيون الكبار بيصمموا ده عن عمد.</p>
+
+<div class="sci-box">
+<div class="sci-lbl">ظاهرة Neural Entrainment · جامعة هارفارد 2014</div>
+<p>المخ البشري لديه قدرة فطرية على <span class="hl2">مزامنة موجاته الكهربية مع الترددات الخارجية</span>. إيقاع 120 BPM ثابت لمدة 8 دقائق كافي يحرّك مخك من بيتا لألفا. 20 دقيقة — للثيتا. (Nozaradan et al., 2011, Journal of Neuroscience)</p>
+</div>
+
+<div class="sec">نشاط 02: اختار BPM التدفق المناسب لك</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🎚️</span><div><div class="act-title">مقياس BPM الشخصي</div><div class="act-sub">اضغط على الـ BPM اللي بيوصّلك أكتر</div></div></div>
+  <div class="bpm-grid">
+    <div class="bpm-card" onclick="selBpm(this,'90-100','ديب هاوس كلاسيك: تدفق جسدي-عاطفي متوازن. أنسب للمبتدئين وجلسات التأمل.')"><div class="bpm-n">90–100</div><div class="bpm-g">ديب هاوس</div></div>
+    <div class="bpm-card" onclick="selBpm(this,'110-120','دونتيمبو/ميدتيمبو: التدفق الأعمق يحدث هنا. Groove واضح بيسحب الجسم.')"><div class="bpm-n">110–120</div><div class="bpm-g">ميد تيمبو</div></div>
+    <div class="bpm-card" onclick="selBpm(this,'125-135','تيكنو كلاسيك: تدفق مكثف، تراجع الأنا الكامل. للمتمرسين.')"><div class="bpm-n">125–135</div><div class="bpm-g">تيكنو</div></div>
+    <div class="bpm-card" onclick="selBpm(this,'138-148','ترانس: تدفق روحي، إحساس بالتسامي والطيران.')"><div class="bpm-n">138–148</div><div class="bpm-g">ترانس</div></div>
+    <div class="bpm-card" onclick="selBpm(this,'150–180','إندستريال: تدفق مواجهة، مكثف جداً — مش للكل.')"><div class="bpm-n">150–180</div><div class="bpm-g">إندستريال</div></div>
+    <div class="bpm-card" onclick="selBpm(this,'60-80','أمبيانت: تدفق تأملي عميق، استبطاني، هادئ.')"><div class="bpm-n">60–80</div><div class="bpm-g">أمبيانت</div></div>
+  </div>
+  <div class="bpm-result" id="bpmResult">اختار الـ BPM اللي بتحسه بيشيل دماغك</div>
+</div>
+
+<div class="sci-box">
+<div class="sci-lbl">الفيزياء الصوتية · BASS & THE BODY</div>
+<p>نغمات البيس <span class="hl2">20–80 Hz</span> — الجسم بيحسها قبل ما الأذن تسمعها. بتنشّط الجهاز العصبي اللاإرادي مباشرة عبر الجلد والعظام والصدر. ده مش مجاز — ده فيزياء صوتية موثّقة (Goodwin, 2006; Trout, 2016).</p>
+</div>
+
+<p class="p">التكنو أكثر كفاءة من الأدوية في الوصول للتدفق — مع فارق جوهري: ده طبيعي ومتكرر ولا يترك مخلّفات. جسمك بيتعلم الطريق كل مرة تعمله.</p>
+`},
+
+/* ────────── 02 ────────── */
+{num:"02",title:"الأخطاء اللي بتمنعك من التدفق",desc:"الفشل الشائع وكيف تحله",badges:['fix'],
+html:`
+<div class="rh-n">الفصل 02 · COMMON FAILURES</div>
+<div class="rh-t">الأخطاء اللي بتمنعك</div>
+<div class="rh-i">90% من الناس بتحاول تدخل التدفق وبتفشل — مش لأنهم مش قادرين، لأنهم بيعملوا نفس الأخطاء.</div>
+<div class="rh-sep"></div>
+
+<div class="warn-box"><div class="warn-lbl">⚠ الخطأ الأول · THE PHONE TRAP</div><p>الإشعار الواحد بيكسر الـ Neurochemical Cascade كلها في أقل من <span class="hl">23 دقيقة</span> هو وقت العودة للتدفق بعد أي انقطاع (دراسة UC Irvine, Gloria Mark). يعني مش بتقطع دقيقة — بتقطع نص ساعة من التدفق.</p></div>
+
+<div class="warn-box"><div class="warn-lbl">⚠ الخطأ التاني · WRONG INTENTION</div><p>الاستماع "عشان تعدّي الوقت" أو "عشان تتشاف" مش هيوصّلك. التدفق بيحتاج <span class="hl">انتباه موجّه</span> — مش سلبي. ده مش معناه جدية زيادة، معناه حضور واعي.</p></div>
+
+<div class="warn-box"><div class="warn-lbl">⚠ الخطأ التالت · FAMILIARITY TRAP</div><p>الموسيقى المألوفة جداً بتحفّز منطقة مختلفة في المخ (default mode network) وبتجيب أفكار وذكريات. مخك بيغني مع التراك بدل ما ينغمس فيه.</p></div>
+
+<div class="warn-box"><div class="warn-lbl">⚠ الخطأ الرابع · CHALLENGE MISMATCH</div><p>لو الموسيقى سهلة جداً عليك — ملل وخروج من التدفق. لو صعبة جداً — قلق ومقاومة. لازم تكون في <span class="hl">المنطقة الوسط</span> (Challenge-Skill Balance — Csikszentmihalyi, 1990).</p></div>
+
+<div class="warn-box"><div class="warn-lbl">⚠ الخطأ الخامس · WRONG ENVIRONMENT</div><p>الضوء الكتير بيبقي القشرة البصرية مشغّلة وبيمنع التحوّل لثيتا. صوت الخلفية المتقطع (حركة، ناس، نوتيفيكيشنز) بيبقي المخ في وضع يقظة بيتا.</p></div>
+
+<div class="sec">نشاط 03: تشخيص حالتك</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🔍</span><div><div class="act-title">اكتشف أكبر عائق عندك</div><div class="act-sub">اختار الوصف اللي أقرب لتجربتك</div></div></div>
+  <div class="quiz-opts" id="diagOpts">
+    <div class="quiz-opt" onclick="diag(this,0)">بسمع موسيقى وفجأة ألاقي نفسي بفكر في حاجة تانية خالص</div>
+    <div class="quiz-opt" onclick="diag(this,1)">أول ما يجي إشعار، بفتح التليفون حتى لو بقول لأ</div>
+    <div class="quiz-opt" onclick="diag(this,2)">بدخل الحفلة وبحاول أعمل كونتنت أكتر من ما بعيش اللحظة</div>
+    <div class="quiz-opt" onclick="diag(this,3)">بسمع نفس البلايليست دايماً ومش بحس بحاجة جديدة</div>
+    <div class="quiz-opt" onclick="diag(this,4)">بحاول أبقى في التدفق بس جسمي متعب أو مش متمركز</div>
+  </div>
+  <div class="quiz-fb" id="diagFb"></div>
+</div>
+
+<div class="ok-box"><div class="ok-lbl">✓ الحل الموحّد لكل الأخطاء</div><p>قاعدة الـ <span class="hl">10 دقايق المقدسة</span>: أي جلسة تدفق لازم الـ 10 دقايق الأولى تكون تليفون مقفول + ضلام أو عيون مسكّرة + موسيقى جديدة نسبياً. الـ 10 دقايق دي هي المدة اللي مخك بيحتاجها للتحوّل من بيتا لألفا.</p></div>
+
+<div class="sec">نشاط 04: شيك ليست الجلسة المثالية</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">✓</span><div><div class="act-title">قبل كل جلسة تدفق</div><div class="act-sub">شيّك اللي اتعمل واتبع تقدمك</div></div></div>
+  <div class="chk-list" id="sessionChk">
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">التليفون في الأوضة التانية أو Silent Mode</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">الإضاءة منخفضة أو مظلم كامل</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">سماعات جيدة أو مكان هادي</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">موسيقى جديدة أو شبه جديدة في البلايليست</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">تلات نفاسات عميقة قبل البداية</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">النية محددة: "أنا هنا للانغماس مش لتعدية الوقت"</div></div>
+  </div>
+  <div class="chk-prog" id="chkProg">0 / 6 مكتمل</div>
+</div>
+`},
+
+/* ────────── 03 ────────── */
+{num:"03",title:"التدريب — 30 يوم لأسلوب حياة",desc:"البروتوكول الكامل والمتتبع الأسبوعي",badges:['act'],
+html:`
+<div class="rh-n">الفصل 03 · TRAINING</div>
+<div class="rh-t">30 يوم لأسلوب حياة</div>
+<div class="rh-i">التدفق مهارة — مش موهبة. وزي كل مهارة، المخ بيتدرّب عليها.</div>
+<div class="rh-sep"></div>
+
+<div class="sci-box">
+<div class="sci-lbl">العلم وراء التدريب · NEUROPLASTICITY</div>
+<p>المخ بيعمل مسارات عصبية جديدة (Synaptic Pathways) كل مرة تعمل نشاط متكرر. بعد <span class="hl2">21 يوماً</span> من الممارسة اليومية، مسار التدفق بيبدأ يبقى Automatic. بعد <span class="hl2">66 يوماً</span>، بيبقى habit حقيقي (Lally et al., UCL, 2010).</p>
+</div>
+
+<div class="sec">نشاط 05: متتبع الـ 30 يوم</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">📅</span><div><div class="act-title">سجّل جلساتك اليومية</div><div class="act-sub">اضغط على اليوم لما تكمّله</div></div></div>
+  <div style="display:flex;justify-content:space-between;font-size:.65rem;color:var(--muted);margin-bottom:4px">
+    <span>الأسبوع 1</span><span>الأسبوع 2</span><span>الأسبوع 3</span><span>الأسبوع 4</span>
+  </div>
+  <div class="week-grid" id="dayGrid"></div>
+  <div style="display:flex;gap:12px;margin-top:.6rem;font-size:.7rem;color:var(--muted)">
+    <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;background:#001a08;border:.5px solid #1a6a3a;border-radius:2px;display:inline-block"></span>مكتمل</span>
+    <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border:.5px solid var(--gold);border-radius:2px;display:inline-block"></span>اليوم</span>
+  </div>
+  <div id="dayStreak" style="margin-top:.7rem;font-size:.78rem;color:var(--text);padding:.5rem .7rem;background:var(--s1);border-radius:3px;border-right:2px solid var(--gold)">
+    0 أيام متتالية — ابدأ الرحلة اليوم ⚡
+  </div>
+</div>
+
+<p class="p">البروتوكول مقسّم على 4 مراحل — كل مرحلة بتبني على اللي قبلها:</p>
+
+<div class="ok-box"><div class="ok-lbl">المرحلة 01 · الأسبوع 1–2 · AWARENESS</div><p><strong>الهدف:</strong> تتعلم تلاحظ المخ. 20 دقيقة يومياً استماع من غير تليفون. لاحظ بس — إمتى مخك بيهدى وإمتى بيشتت. مش محتاج تعمل حاجة أكتر.</p></div>
+<div class="ok-box"><div class="ok-lbl">المرحلة 02 · الأسبوع 3–4 · ENTRY</div><p><strong>الهدف:</strong> تدخل التدفق عن عمد. 40 دقيقة بالضلام والسماعات. ابدأ بـ 90 BPM وارفع تدريجياً. لاحظ متى جسمك يبدأ يتحرك من غير قرار.</p></div>
+<div class="ok-box"><div class="ok-lbl">المرحلة 03 · الأسبوع 5–6 · DEEPENING</div><p><strong>الهدف:</strong> تمد الوقت في التدفق. 90 دقيقة كاملة، تليفون برّه الأوضة. سجّل بعدها في الجورنال.</p></div>
+<div class="ok-box"><div class="ok-lbl">المرحلة 04 · الأسبوع 7–8 · LIFESTYLE</div><p><strong>الهدف:</strong> التدفق يبقى جزء من روتينك. تطبيق الحالة في مجالات تانية — الشغل، الرياضة، الإبداع.</p></div>
+
+<div class="sec">نشاط 06: تايمر الجلسة</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">⏱</span><div><div class="act-title">تايمر التدفق</div><div class="act-sub">ابدأ الجلسة واضبط الوقت</div></div></div>
+  <div class="timer-box">
+    <div class="timer-disp" id="timerDisp">20:00</div>
+    <div class="timer-btns">
+      <div class="tbtn" onclick="setTimer(20)">20 د</div>
+      <div class="tbtn" onclick="setTimer(40)">40 د</div>
+      <div class="tbtn" onclick="setTimer(90)">90 د</div>
+    </div>
+    <div class="timer-btns">
+      <button class="tbtn" id="tStart" onclick="startTimer()">▶ ابدأ</button>
+      <button class="tbtn" onclick="stopTimer()">■ وقف</button>
+    </div>
+    <div style="font-size:.72rem;color:var(--muted);text-align:center" id="timerMsg">اختار مدة الجلسة</div>
+  </div>
+</div>
+`},
+
+/* ────────── 04 ────────── */
+{num:"04",title:"قياس التدفق — هل نجح التدريب؟",desc:"علامات النجاح والمقاييس العلمية",badges:['sci','act'],
+html:`
+<div class="rh-n">الفصل 04 · MEASUREMENT</div>
+<div class="rh-t">هل نجح التدريب؟</div>
+<div class="rh-i">التدفق قابل للقياس. مش إحساس مبهم — فيه علامات محددة هتعرفها بالنبض.</div>
+<div class="rh-sep"></div>
+
+<div class="sci-box">
+<div class="sci-lbl">مقاييس التدفق العلمية · VALIDATED SCALES</div>
+<p>عالم النفس <span class="hl2">Susan Jackson</span> طوّرت مقياس <strong>Flow State Scale (FSS-2)</strong> سنة 2002 اللي اتستخدم في 200+ دراسة. المقياس بيقيس 9 أبعاد للتدفق.</p>
+</div>
+
+<div class="sec">نشاط 07: مقياس التدفق الكامل</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">📊</span><div><div class="act-title">قيّم تجربة التدفق الأخيرة</div><div class="act-sub">بعد كل جلسة، جاوب على الأسئلة دي</div></div></div>
+
+  <div id="fssQuiz">
+    <div class="quiz-q" id="fssQ"></div>
+    <div class="quiz-opts" id="fssOpts"></div>
+    <div style="font-size:.72rem;color:var(--muted);margin-top:.5rem;font-family:monospace" id="fssProgress"></div>
+  </div>
+  <div id="fssResult" style="display:none">
+    <div class="score-disp">
+      <div class="score-num" id="fssScore">0</div>
+      <div class="score-label">مؤشر التدفق / 100</div>
+      <div class="score-bar"><div class="score-fill" id="fssFill" style="width:0%"></div></div>
+      <div class="score-result" id="fssLabel"></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">العلامات الجسدية للتدفق الحقيقي</div>
+<p class="p">العلامات دي موثّقة علمياً — مش كلها لازم تيجي مع بعض، بس 5 أو أكتر تأكد إنك كنت في تدفق حقيقي:</p>
+<ul class="li">
+  <li>الوقت اتمد أو اختفى (Time Distortion)</li>
+  <li>حركة تلقائية بلا قرار واعي (Automaticity)</li>
+  <li>إحساس بالوحدة مع المحيط (Merger of Action & Awareness)</li>
+  <li>الصوت الداخلي الناقد اختفى (Reduced Self-Monitoring)</li>
+  <li>طاقة عالية بلا إجهاد (Paradoxical Energization)</li>
+  <li>بعد الجلسة: إحساس هادئ جداً وصافي (Post-Flow Clarity)</li>
+  <li>جسمك ابتدأ يتحرك قبل ما تفكر (Body-Before-Mind)</li>
+</ul>
+
+<div class="sec">نشاط 08: جورنال التدفق اليومي</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">📝</span><div><div class="act-title">سجّل ملاحظاتك</div><div class="act-sub">بعد كل جلسة — 3 دقايق كافية</div></div></div>
+  <textarea class="journal-area" id="journalTxt" placeholder="صف جلستك النهارده: إيه اللي حسيته، إمتى دخلت التدفق، إيه اللي قاطعك (لو فيه حاجة)، وإيه اللي عايز تغيّره في الجلسة الجاية..."></textarea>
+  <button class="save-btn" onclick="saveJournal()">حفظ الملاحظة</button>
+  <div class="saved-note" id="savedNote">✓ اتحفظت!</div>
+  <div id="prevEntry" style="margin-top:.8rem"></div>
+</div>
+
+<div class="pq"><p>"الـ Journal مش ضعف — هو السلاح. كل إنسان له signature flow مختلف. الـ Journal هو الخريطة."</p></div>
+`},
+
+/* ────────── 05 ────────── */
+{num:"05",title:"التدفق في الحياة كلها",desc:"من الموسيقى للشغل والإبداع والعلاقات",badges:['act'],
+html:`
+<div class="rh-n">الفصل 05 · LIFESTYLE</div>
+<div class="rh-t">التدفق في الحياة كلها</div>
+<div class="rh-i">الموسيقى هي البوابة — بس التدفق مش بيوقف لما الموسيقى توقف.</div>
+<div class="rh-sep"></div>
+
+<div class="sci-box">
+<div class="sci-lbl">دراسة McKinsey 2013 · 10 سنين بحث</div>
+<p>دراسة على 5,000 مدير تنفيذي وجدت إن المديرين اللي بيوصفوا نفسهم في "حالة تدفق متكررة" كانوا <span class="hl2">أكثر إنتاجية بنسبة 500%</span> من زملائهم — وبيحكوا إن الأمر بدأ من ممارسة موسيقية أو رياضية أو فنية.</p>
+</div>
+
+<p class="p">الفكرة مش إنك تسمع تكنو وانت شغّال على Excel. الفكرة إن المخ اللي اتدرّب على التدفق في الموسيقى بيقدر <span class="hl">يستدعي الحالة دي في أي نشاط</span> تاني — بشرط إن العناصر الأساسية موجودة.</p>
+
+<div class="sec">العناصر الأساسية للتدفق في أي نشاط</div>
+<ul class="li">
+  <li><span class="hl">هدف واضح</span> — مش "أشتغل" — "أخلص الريبور ده في ساعة"</li>
+  <li><span class="hl">فيدباك فوري</span> — تعرف إمتى اتقدمت وإمتى وقفت</li>
+  <li><span class="hl">تحدي = مهارة</span> — صعب بالظبط مش مستحيل ومش سهل</li>
+  <li><span class="hl">بيئة خالية من الانقطاعات</span> — نفس قاعدة الموسيقى</li>
+</ul>
+
+<div class="sec">نشاط 09: خريطة التدفق الشخصية</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🗺</span><div><div class="act-title">في أنهي مجالات بتدخل التدفق؟</div><div class="act-sub">اضغط على كل مجال بتحس فيه بالتدفق</div></div></div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:.5rem 0" id="lifeMap">
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">موسيقى</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">رياضة</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">رسم/تصميم</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">كتابة</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">كود</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">إنتاج موسيقي</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">طهي</div>
+    <div class="bpm-card" style="flex:auto;min-width:90px" onclick="toggleLife(this)">ألعاب</div>
+  </div>
+  <div id="lifeResult" style="font-size:.8rem;color:var(--text);margin-top:.6rem;padding:.5rem .7rem;background:var(--s1);border-radius:3px;border-right:2px solid var(--gold)">اختار المجالات عشان تشوف خريطتك</div>
+</div>
+
+<div class="sci-box">
+<div class="sci-lbl">الـ Transfer Effect · علم الأعصاب</div>
+<p>المخ بيعمل Generalization للمسارات العصبية. لما تتدرب على التدفق في الموسيقى، المسار نفسه بيبقى متاح للشغل والرياضة. ده مش مجاز — ده Cross-Domain Neural Transfer موثّق في neuroimaging (Zatorre & Salimpoor, 2013).</p>
+</div>
+
+<div class="sec">نشاط 10: روتين التدفق اليومي (صمّمه)</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🔁</span><div><div class="act-title">صمّم روتينك</div><div class="act-sub">اضغط لتفعيل أو إلغاء كل خطوة</div></div></div>
+  <div class="chk-list" id="routineChk">
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">صباحاً: 10 دقايق موسيقى بلا تليفون (قبل السوشيال ميديا)</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">قبل أي تاسك مهم: 5 دقايق موسيقى إنسترومنتال كـ warm-up</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">أسبوعياً: جلسة استماع كاملة 90 دقيقة</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">شهرياً: حضور حفلة أو ليلة موسيقى لايف</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">دايماً: بلايليست للتدفق منفصلة عن البلايليست العادية</div></div>
+  </div>
+  <div class="chk-prog" id="routProg">0 / 5 مفعّل</div>
+</div>
+`},
+
+/* ────────── 06 ────────── */
+{num:"06",title:"الحفلة والتدفق الجماعي",desc:"العلم وراء المشهد وإزاي تعيشه",badges:['sci'],
+html:`
+<div class="rh-n">الفصل 06 · COLLECTIVE</div>
+<div class="rh-t">الحفلة والتدفق الجماعي</div>
+<div class="rh-i">التدفق الجماعي أقوى من الفردي بعشر مرات. العلم بيقول كده.</div>
+<div class="rh-sep"></div>
+
+<div class="sci-box">
+<div class="sci-lbl">Inter-Brain Synchrony · 2017 Royal Society</div>
+<p>دراسة نشرتها Royal Society وجدت إن الناس في بيئات موسيقية جماعية بيزامنوا <span class="hl2">موجات مخهم (EEG) بشكل حرفي</span> في منطقة ألفا وثيتا. التزامن ده بيزيد مشاعر الانتماء والثقة والتدفق بشكل يتخطى أي تجربة فردية.</p>
+</div>
+
+<p class="p">مش صدفة إن أكثر تجارب التدفق عمقاً اللي بيوصفها الناس حصلت في حفلات — مش في البيت. الطاقة الجماعية حرفياً بتعدي بين الناس. كل قلب بيدق على نفس الريدم، المخ بيلتقط التزامن ده، والنيوروكيميكالز بتتضاعف.</p>
+
+<div class="pq"><p>"الكلوب مش مكان ترفيه — هو مختبر تدفق جماعي بني بغير وعي كامل."</p></div>
+
+<div class="sci-box">
+<div class="sci-lbl">ظاهرة Entrainment الجماعية</div>
+<p>الجسم البشري فيه ساعة داخلية (Circadian Rhythm) بتتزامن مع البيئة المحيطة. في الحفلات، الساعة دي بتتزامن مع الإيقاع الخارجي في ظاهرة بتسمى <span class="hl2">Social Entrainment</span> — الجسم بيبقى حرفياً جزء من الموسيقى.</p>
+</div>
+
+<div class="sec">نشاط 11: دليل الحفلة لأقصى تدفق</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🏴</span><div><div class="act-title">بروتوكول الحفلة</div><div class="act-sub">شيّك قبل وأثناء وبعد الحفلة</div></div></div>
+  <div style="font-size:.78rem;color:var(--gold);margin-bottom:.5rem;letter-spacing:1px">قبل الحفلة</div>
+  <div class="chk-list" id="raveChk">
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">إذن الكراود يكون مرتاح جسدياً (نوم كافي)</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">مش دافع توقعات زيادة للدي جي أو للموسيقى</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">أتعرف على الدي جي والستايل مسبقاً (مش معلوماتياً — سماعياً)</div></div>
+  </div>
+  <div style="font-size:.78rem;color:var(--gold);margin:.7rem 0 .4rem;letter-spacing:1px">أثناء الحفلة</div>
+  <div class="chk-list">
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">التليفون في الجيب — مش في إيدك</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">سكّر عيونك لمدة دقيقتين على الأقل كل 20 دقيقة</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">ماتسألش نفسك "أنا بتسلى؟" — السؤال ده بيكسر التدفق</div></div>
+    <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box">✓</div><div class="chk-text">خلي جسمك يتحرك قبل ما تفكر</div></div>
+  </div>
+</div>
+
+<div class="warn-box"><div class="warn-lbl">⚠ الخطأ الأكبر في الحفلات</div><p>الـ Performative Raving — الرقص عشان تتشاف مش عشان تحس. المخ بيعرف الفرق. الـ Self-Consciousness بيمنع الـ Hypofrontality اللي بيخلّي التدفق يحصل. من المحتوى الأكثر تفاعلاً على تحت الأرض: "معظم الناس مبقيتش تحب التكنو — بقوا بيحبوا فكرة إنهم بيسمعوا تكنو."</p></div>
+`},
+
+/* ────────── 07 ────────── */
+{num:"07",title:"للمنتجين — صناعة التدفق",desc:"إزاي تبني التدفق في موسيقاك",badges:['act','sci'],
+html:`
+<div class="rh-n">الفصل 07 · CREATION</div>
+<div class="rh-t">صناعة التدفق</div>
+<div class="rh-i">لو عارف تدخل التدفق وانت بتسمع — اتعلم تبنيه في الموسيقى اللي بتعملها.</div>
+<div class="rh-sep"></div>
+
+<div class="pq"><p>"أحسن التراكات مصنعتهاش — اكتشفتهم وأنا في التدفق."</p></div>
+
+<div class="sci-box">
+<div class="sci-lbl">علم الإبداع والتدفق · Teresa Amabile, Harvard</div>
+<p>دراسة على 12,000 يوم عمل إبداعي وجدت إن <span class="hl2">الأيام اللي فيها Flow State</span> أنتجت إبداع أعلى جودة بشكل واضح — حتى بعد ما انتهى التدفق. المخ في "الـ Post-Flow State" بيفضل منفتح وأكثر إبداعاً لساعات.</p>
+</div>
+
+<div class="sec">نشاط 12: اختبار المنتج</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🎛</span><div><div class="act-title">أنت في أنهي مرحلة؟</div><div class="act-sub">قيّم نفسك كمنتج بصدق</div></div></div>
+  <div id="prodQuiz">
+    <div class="quiz-q">إيه اللي بيحصل عادةً في أول 30 دقيقة من الإنتاج؟</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt" onclick="prodAns(this,0)">بفضل ما أرضاش على حاجة وأمسح وأعيد من أول وجديد</div>
+      <div class="quiz-opt" onclick="prodAns(this,1)">بدخل في ريدم كويس وبنتج بثقة</div>
+      <div class="quiz-opt" onclick="prodAns(this,2)">بفتح اللابتوب وأقعد أبص في الشاشة مش عارف أبدأ</div>
+      <div class="quiz-opt" onclick="prodAns(this,3)">بحس بضغط الوقت وأحاول أنتج تراك كامل في جلسة واحدة</div>
+    </div>
+    <div class="quiz-fb" id="prodFb"></div>
+  </div>
+</div>
+
+<div class="sec">قواعد التدفق في الإنتاج</div>
+<ul class="li">
+  <li><span class="hl">90 دقيقة يومياً</span> > 8 ساعات أسبوعياً — المخ بيتدرب بالتكرار مش بالكم</li>
+  <li><span class="hl">القيود أدواتك</span> — مكبّش غير آلتين أو تلاتة، BPM ثابت، كي واحد</li>
+  <li><span class="hl">الـ 20 دقيقة الأولى مقدّسة</span> — ماتحكمش على الصوت فيها</li>
+  <li><span class="hl">سجّل كل حاجة</span> — حتى اللي مش بيعجبك، بكره هتحتاجه</li>
+  <li><span class="hl">اسمع من بره</span> — جاز، كلاسيك، شعبي، موسيقى عالم — الجديد بيفتح المخ</li>
+</ul>
+
+<div class="ok-box"><div class="ok-lbl">✓ بروتوكول جلسة الإنتاج</div><p>ابدأ بـ 5 دقايق موسيقى إلكترونية كـ Warm-Up. افتح البرنامج وضع <strong>قيد واحد فقط</strong> على نفسك لليوم ده. اشتغل لـ 25 دقيقة بلا تليفون (Pomodoro). خد راحة 5 دقايق. كرر 3 مرات. في اليوم ده، <strong>الجودة مش هدفك — الحضور هو الهدف.</strong></p></div>
+
+<div class="sec">نشاط 13: خطة الأسبوع للمنتج</div>
+<div class="act-box">
+  <div class="act-hdr"><span class="act-icon">🗓</span><div><div class="act-title">اضبط أهدافك الأسبوعية</div><div class="act-sub">اختار هدفك لكل يوم</div></div></div>
+  <div style="display:flex;flex-direction:column;gap:6px" id="weekPlan">
+    <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:center">
+      <span style="font-size:.72rem;color:var(--muted)">السبت</span>
+      <select style="background:var(--s3);border:.5px solid var(--b2);color:var(--text);font-family:'Cairo',sans-serif;font-size:.78rem;padding:5px 8px;border-radius:2px;width:100%" onchange="planChange(this)"><option value="">اختار هدف</option><option>تجربة صوت جديد</option><option>كمّل تراك ناقصه</option><option>استماع فقط — بلا إنتاج</option><option>تحليل تراك بتحبه</option><option>راحة كاملة</option></select>
+    </div>
+    <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:center">
+      <span style="font-size:.72rem;color:var(--muted)">الأحد</span>
+      <select style="background:var(--s3);border:.5px solid var(--b2);color:var(--text);font-family:'Cairo',sans-serif;font-size:.78rem;padding:5px 8px;border-radius:2px;width:100%" onchange="planChange(this)"><option value="">اختار هدف</option><option>تجربة صوت جديد</option><option>كمّل تراك ناقصه</option><option>استماع فقط — بلا إنتاج</option><option>تحليل تراك بتحبه</option><option>راحة كاملة</option></select>
+    </div>
+    <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:center">
+      <span style="font-size:.72rem;color:var(--muted)">الاثنين</span>
+      <select style="background:var(--s3);border:.5px solid var(--b2);color:var(--text);font-family:'Cairo',sans-serif;font-size:.78rem;padding:5px 8px;border-radius:2px;width:100%" onchange="planChange(this)"><option value="">اختار هدف</option><option>تجربة صوت جديد</option><option>كمّل تراك ناقصه</option><option>استماع فقط — بلا إنتاج</option><option>تحليل تراك بتحبه</option><option>راحة كاملة</option></select>
+    </div>
+    <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:center">
+      <span style="font-size:.72rem;color:var(--muted)">الثلاثاء</span>
+      <select style="background:var(--s3);border:.5px solid var(--b2);color:var(--text);font-family:'Cairo',sans-serif;font-size:.78rem;padding:5px 8px;border-radius:2px;width:100%" onchange="planChange(this)"><option value="">اختار هدف</option><option>تجربة صوت جديد</option><option>كمّل تراك ناقصه</option><option>استماع فقط — بلا إنتاج</option><option>تحليل تراك بتحبه</option><option>راحة كاملة</option></select>
+    </div>
+  </div>
+  <div class="ok-box" style="margin-top:.7rem" id="planMsg"><div class="ok-lbl">TIP</div><p>خلي يوم واحد في الأسبوع على الأقل "استماع فقط" — من غير DAW، من غير تفكير في الإنتاج. ده بيرجّع الأذن لحالتها الطبيعية.</p></div>
+</div>
+
+<div class="rh-sep" style="margin-top:2rem"></div>
+<div style="text-align:center;padding:1.5rem 0">
+  <div style="font-size:9px;letter-spacing:4px;color:var(--gold);margin-bottom:.6rem;font-family:monospace">EGYPT'S UNDERGROUND · ALIVE & CONNECTED ⚡</div>
+  <div style="font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:.4rem">@TA7TELARD</div>
+  <div style="font-size:.78rem;color:var(--muted);line-height:1.8">النهارده مش يوم "بدء" التدفق — النهارده أنت موجود في اللحظة دي، بتقرأ الكلام ده. ده كفاية للبداية.</div>
+</div>
+`}
+];
+
+let cur=0, scores={fc:3,ft:3,fw:3,fb:3};
+let timerInt=null, timerSec=1200, timerRunning=false;
+const fssQs=[
+  {q:"أثناء الجلسة، كنت مركّز بالكامل على الموسيقى؟",correct:1},
+  {q:"الوقت مرّ بشكل مختلف عن العادي؟",correct:1},
+  {q:"كنت واعي إن إيه اللي المفروض تعمله في كل لحظة؟",correct:1},
+  {q:"الحركة (لو حصلت) كانت تلقائية بدون تفكير؟",correct:1},
+  {q:"حسيت بطاقة بدون إجهاد زايد؟",correct:1},
+  {q:"بعد الجلسة حسيت بصفاء ذهني؟",correct:1},
+];
+let fssIdx=0, fssTotal=0;
+
+function buildWaves(){
+  const w=document.getElementById('cwaves');
+  [20,45,80,110,90,65,100,55,80,120,90,50,70,105,60,85,45,110,75,65,95,35,80,55,90,40,70].forEach((h,i)=>{
+    const b=document.createElement('div');b.className='wb';b.style.height=h+'px';b.style.animationDelay=(i*.09)+'s';w.appendChild(b);
+  });
+}
+
+function buildChapters(){
+  const g=document.getElementById('chGrid');
+  CHS.forEach((c,i)=>{
+    const d=document.createElement('div');d.className='cc2';d.onclick=()=>openCh(i);
+    const badges=c.badges.map(b=>({act:`<span class="cbadge act">نشاط تفاعلي</span>`,sci:`<span class="cbadge sci">علم</span>`,fix:`<span class="cbadge fix">أخطاء وحلول</span>`}[b]||'')).join(' ');
+    d.innerHTML=`<div class="ci"><div class="cn2">الفصل ${c.num}</div><div class="ct">${c.title}</div><div class="cd">${c.desc}</div><div style="margin-top:4px">${badges}</div></div><div class="car">←</div>`;
+    g.appendChild(d);
+  });
+}
+
+function openCh(i){
+  cur=i;
+  document.getElementById('rTitle').textContent=CHS[i].title;
+  document.getElementById('rBody').innerHTML=CHS[i].html;
+  document.getElementById('progT').textContent=`${i+1} / ${CHS.length}`;
+  document.getElementById('progF').style.width=((i+1)/CHS.length*100)+'%';
+  document.getElementById('prevB').disabled=i===0;
+  document.getElementById('nextB').disabled=i===CHS.length-1;
+  go('rdr');
+  window.scrollTo(0,0);
+  setTimeout(initChapter,50);
+}
+
+function initChapter(){
+  buildDayGrid();
+  buildFss();
+  updateScore('fc',document.getElementById('fc')?.value||3);
+}
+
+function go(p){
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  document.getElementById(p).classList.add('on');
+  window.scrollTo(0,0);
+}
+
+function nav(d){if(cur+d>=0&&cur+d<CHS.length)openCh(cur+d);}
+
+/* Sliders */
+function updateScore(k,v){
+  scores[k]=parseInt(v);
+  const el=document.getElementById(k+'-v');
+  if(el) el.textContent=v;
+  const total=Math.round((scores.fc+scores.ft+scores.fw+scores.fb)/0.4);
+  const ts=document.getElementById('totalScore');
+  const sf=document.getElementById('scoreFill');
+  const sr=document.getElementById('scoreResult');
+  if(ts) ts.textContent=total;
+  if(sf) sf.style.width=total+'%';
+  if(sr){
+    if(total<30) sr.textContent='المستوى: مبتدئ — مخك لسه متعلمش يستسلم للإيقاع. الكتاب ده هو بداية التحوّل.';
+    else if(total<55) sr.textContent='المستوى: متوسط — بتلمس التدفق أحياناً بس مش متحكم فيه. الفصول الجاية هتديك الزمام.';
+    else if(total<75) sr.textContent='المستوى: متقدم — بتدخل التدفق بانتظام. الهدف: تطوّل وقته وتنقله لمجالات تانية.';
+    else sr.textContent='المستوى: احترافي — مخك متدرّب على التدفق. وقت التعليم والمشاركة.';
+  }
+}
+
+/* BPM */
+function selBpm(el,range,txt){
+  document.querySelectorAll('.bpm-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const r=document.getElementById('bpmResult');
+  if(r) r.textContent=range+' BPM: '+txt;
+}
+
+/* Checklist */
+function toggleChk(el){
+  el.classList.toggle('done');
+  const parent=el.parentElement;
+  const all=parent.querySelectorAll('.chk-item');
+  const done=parent.querySelectorAll('.chk-item.done');
+  const prog=parent.nextElementSibling;
+  if(prog&&prog.classList.contains('chk-prog')) prog.textContent=done.length+' / '+all.length+' مكتمل';
+}
+
+/* Diag quiz */
+const diagAnswers=[
+  'عندك Default Mode Network نشطة جداً. الحل: موسيقى أجنبية مش عربية في بداية الجلسة — مخك مش هيعرف "يغني معاها".',
+  'الإشعارات هي عدوك الأول. مش قوة إرادة — إزالة السبب: التليفون في أوضة تانية حرفياً.',
+  'الـ Performative Raving — مخك في وضع المراقبة مش الانغماس. جرّب جلسة واحدة في البيت في الضلام تماماً قبل الحفلة الجاية.',
+  'الـ Familiarity Trap. خصّص 20% من كل بلايليست لموسيقى اكتشفتها في آخر أسبوعين.',
+  'مخك مش هيدخل التدفق وجسمك تعبان. النوم والترطيب مش نصيحة صحية — هما شرط عصبي.'
+];
+function diag(el,idx){
+  if(document.querySelector('#diagOpts .quiz-opt.correct')) return;
+  el.classList.add('correct');
+  const fb=document.getElementById('diagFb');
+  if(fb){fb.textContent=diagAnswers[idx];fb.className='quiz-fb show ok';}
+}
+
+/* FSS Quiz */
+function buildFss(){
+  fssIdx=0;fssTotal=0;
+  showFssQ();
+}
+function showFssQ(){
+  const qEl=document.getElementById('fssQ');
+  const oEl=document.getElementById('fssOpts');
+  const pEl=document.getElementById('fssProgress');
+  const rEl=document.getElementById('fssResult');
+  if(!qEl) return;
+  if(fssIdx>=fssQs.length){
+    document.getElementById('fssQuiz').style.display='none';
+    if(rEl){rEl.style.display='block';
+      const sc=Math.round(fssTotal/fssQs.length*100);
+      const sf=document.getElementById('fssFill');
+      const sl=document.getElementById('fssLabel');
+      const sn=document.getElementById('fssScore');
+      if(sn)sn.textContent=sc;
+      if(sf)sf.style.width=sc+'%';
+      if(sl){
+        if(sc<40)sl.textContent='تدفق خفيف أو غير مكتمل — مش مشكلة. الـ FSS بيتحسن مع التدريب.';
+        else if(sc<70)sl.textContent='تدفق متوسط — كنت قريب من المنطقة. التدريب هيوصّلك.';
+        else sl.textContent='تدفق عميق — مبروك! سجّل الظروف دي وكرّرها.';
+      }
+    }
+    return;
+  }
+  const q=fssQs[fssIdx];
+  if(qEl) qEl.textContent=q.q;
+  if(oEl) oEl.innerHTML=['بشدة لأ','لأ','أحياناً','أيوه','بشدة أيوه'].map((t,i)=>`<div class="quiz-opt" onclick="fssAns(this,${i})">${t}</div>`).join('');
+  if(pEl) pEl.textContent=`${fssIdx+1} / ${fssQs.length}`;
+}
+function fssAns(el,val){
+  if(el.parentElement.querySelector('.correct')) return;
+  fssTotal+=val/4;
+  el.classList.add('correct');
+  setTimeout(()=>{fssIdx++;showFssQ();},400);
+}
+
+/* Prod quiz */
+const prodAnss=[
+  'الـ Perfectionism Loop — أكبر قاتل للتدفق الإبداعي. الحل: قرار واحد في البداية: "الجلسة دي للاستكشاف مش للإتقان."',
+  'ممتاز — أنت في بداية مسار صح. الخطوة الجاية: مد وقت الريدم لـ 60 دقيقة.',
+  'قاعدة الـ 2 دقيقة: أي تراك أبدأه في أقل من دقيقتين من فتح البرنامج، حتى لو كان بس kick و bass.',
+  'الـ Marathon Session وهم. 90 دقيقة مع تدفق > 5 ساعات بلا تدفق. قسّم الوقت واحترمه.'
+];
+function prodAns(el,idx){
+  if(el.parentElement.querySelector('.correct')) return;
+  el.classList.add('correct');
+  const fb=document.getElementById('prodFb');
+  if(fb){fb.textContent=prodAnss[idx];fb.className='quiz-fb show ok';}
+}
+
+/* Day grid */
+function buildDayGrid(){
+  const g=document.getElementById('dayGrid');
+  if(!g) return;
+  g.innerHTML='';
+  const saved=JSON.parse(localStorage.getItem?.('t7_days')||'{}');
+  for(let i=1;i<=28;i++){
+    const d=document.createElement('div');d.className='day-cell';
+    if(i===new Date().getDate()) d.classList.add('today');
+    if(saved[i]) d.classList.add('done');
+    d.innerHTML=`<span>${i}</span>`;
+    d.onclick=()=>{d.classList.toggle('done');updateStreak();};
+    g.appendChild(d);
+  }
+  updateStreak();
+}
+function updateStreak(){
+  const done=document.querySelectorAll('#dayGrid .day-cell.done').length;
+  const s=document.getElementById('dayStreak');
+  if(s){
+    if(done===0)s.textContent='0 أيام متتالية — ابدأ الرحلة اليوم ⚡';
+    else if(done<7)s.textContent=`${done} أيام مكتملة 🔥 استمر!`;
+    else if(done<14)s.textContent=`${done} أيام — مخك بيبني المسار العصبي 🧠`;
+    else if(done<21)s.textContent=`${done} أيام — 21 يوم قريبة، العادة بدأت تتكوّن ⚡`;
+    else s.textContent=`${done} أيام — النيوروبلاستيسيتي شغّالة بكامل طاقتها 🏴`;
+  }
+}
+
+/* Timer */
+function setTimer(mins){timerSec=mins*60;timerRunning=false;clearInterval(timerInt);renderTimer();}
+function renderTimer(){
+  const m=Math.floor(timerSec/60).toString().padStart(2,'0');
+  const s=(timerSec%60).toString().padStart(2,'0');
+  const el=document.getElementById('timerDisp');if(el)el.textContent=m+':'+s;
+}
+function startTimer(){
+  if(timerRunning){clearInterval(timerInt);timerRunning=false;const b=document.getElementById('tStart');if(b)b.textContent='▶ ابدأ';return;}
+  timerRunning=true;
+  const b=document.getElementById('tStart');if(b)b.textContent='⏸ وقف';
+  const m=document.getElementById('timerMsg');if(m)m.textContent='الجلسة شغّالة — التليفون في حته تانية ⚡';
+  timerInt=setInterval(()=>{
+    timerSec--;renderTimer();
+    if(timerSec<=0){clearInterval(timerInt);timerRunning=false;
+      const b=document.getElementById('tStart');if(b)b.textContent='▶ ابدأ';
+      const m=document.getElementById('timerMsg');if(m)m.textContent='✓ الجلسة اتكملت! سجّل في الجورنال.';
+    }
+  },1000);
+}
+function stopTimer(){clearInterval(timerInt);timerRunning=false;timerSec=1200;renderTimer();const b=document.getElementById('tStart');if(b)b.textContent='▶ ابدأ';}
+
+/* Journal */
+function saveJournal(){
+  const t=document.getElementById('journalTxt');
+  const n=document.getElementById('savedNote');
+  if(t&&t.value.trim()){
+    const entry=`[${new Date().toLocaleDateString('ar')}]: ${t.value}`;
+    const p=document.getElementById('prevEntry');
+    if(p){p.innerHTML=`<div style="font-size:.75rem;color:var(--muted);padding:.5rem .7rem;background:var(--bg);border-radius:3px;margin-top:.4rem;border:.5px solid var(--b1);direction:rtl">${entry.substring(0,200)}...</div>`;}
+    if(n){n.style.display='block';setTimeout(()=>n.style.display='none',2000);}
+    t.value='';
+  }
+}
+
+/* Life map */
+function toggleLife(el){
+  el.classList.toggle('sel');
+  const sel=[...document.querySelectorAll('#lifeMap .bpm-card.sel')].map(e=>e.textContent);
+  const r=document.getElementById('lifeResult');
+  if(r){
+    if(sel.length===0)r.textContent='اختار المجالات عشان تشوف خريطتك';
+    else r.textContent=`تدفقك الأساسي في: ${sel.join('، ')}. ابدأ التدريب في ${sel[0]} — وهو هيتنقل للباقي تلقائياً عبر الـ Neural Transfer.`;
+  }
+}
+
+/* Plan */
+function planChange(el){
+  const msg=document.getElementById('planMsg');
+  if(msg&&el.value){msg.querySelector('p').textContent=`"${el.value}" — اختيار كويس. الاتساق أهم من الكمال.`;}
+}
+
+buildWaves();
+buildChapters();
+</script>
