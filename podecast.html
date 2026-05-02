@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Buttons</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Watch Videos</h1>
+
+  <button onclick="openVideo('https://www.youtube.com/watch?v=TLvrOMoy5eA')">
+    Video 1
+  </button>
+
+  <button onclick="openVideo('https://www.youtube.com/watch?v=MixzkjNGL2k')">
+    Video 2
+  </button>
+
+  <button onclick="openVideo('https://www.youtube.com/watch?v=arSga2phBvU')">
+    Video 3
+  </button>
+
+  <button onclick="openVideo('https://www.youtube.com/watch?v=dOutOtIHa6A')">
+    Video 4
+  </button>
+
+  <script>
+    function openVideo(url) {
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
